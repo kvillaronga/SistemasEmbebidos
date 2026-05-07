@@ -1,0 +1,29 @@
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Funciones Asignadas al Hardware}
+\label{tab:funciones_hardware}
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\textbf{Función Hardware} & \textbf{Componente Responsable} \\
+\hline
+Medición de temperatura y humedad del aire & Sensor DHT11 \\
+\hline
+Medición de humedad del sustrato & Sensor YL-100 + ADC del ESP32 \\
+\hline
+Activación física de la bomba de riego & Módulo relé canal 1 + bomba sumergible 5 V \\
+\hline
+Activación física del actuador térmico & Módulo relé canal 2 + ventilador/atomizador \\
+\hline
+Aislamiento eléctrico de cargas & Módulo relé 2 canales con optoacoplador \\
+\hline
+Alimentación del sistema & Fuente 5 V DC USB / power bank \\
+\hline
+Filtrado mecánico del agua & Filtro de malla antes de la línea de goteo \\
+\hline
+Distribución del agua a los 3 goteros & Manguera + conectores T + 3 goteros ajustables \\
+\hline
+Contenedor del sustrato y semillas & Contenedor triangular (base 40 cm, altura mín. 10 cm) \\
+\hline
+\end{tabularx}
+\end{table*}

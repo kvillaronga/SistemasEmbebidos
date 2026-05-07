@@ -1,0 +1,33 @@
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Funciones Asignadas al Firmware (Software)}
+\label{tab:funciones_firmware}
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\textbf{Función Software} & \textbf{Módulo Firmware} \\
+\hline
+Lectura periódica de temperatura y humedad (DHT11) & readSensors() --- timer 5 s \\
+\hline
+Lectura periódica de humedad del sustrato (YL-100) & readSensors() --- timer 10 s \\
+\hline
+Validación de lecturas (rango válido, NaN, error) & readSensors() --- validación inline \\
+\hline
+Lógica de control de riego con histéresis & controlIrrigation() \\
+\hline
+Lógica de control térmico con histéresis & controlTemperature() \\
+\hline
+Actualización del estado de actuadores (GPIO) & updateActuators() \\
+\hline
+Serialización de datos en JSON & publishIoTData() --- ArduinoJson \\
+\hline
+Publicación de telemetría en MQTT / Firebase & publishIoTData() --- PubSubClient \\
+\hline
+Conexión Wi-Fi y reconexión automática & setup() + loop() --- WiFi.begin() \\
+\hline
+Temporización no bloqueante (sin delay()) & millis() + lastTime\_X \\
+\hline
+Constantes de umbrales y pines & config.h --- HUMIDITY\_MIN, TEMP\_MAX, \ldots \\
+\hline
+\end{tabularx}
+\end{table*}

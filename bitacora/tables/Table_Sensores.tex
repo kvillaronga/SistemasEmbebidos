@@ -1,0 +1,16 @@
+
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Sensores del Sistema}
+\label{tab:sensores}
+\begin{tabularx}{\textwidth}{|c|c|X|}
+\hline
+\textbf{Sensor} & \textbf{Interfaz / Rango} & \textbf{Variable medida y justificación} \\
+\hline
+DHT11 & Digital 1-wire / 0--50°C, 20--90\%HR & Temperatura y humedad del aire. Bajo costo, librería Adafruit en PlatformIO, compatible 3.3~V. \\
+\hline
+YL-100 & Analógica ADC / 0--4095 (12-bit) & Humedad del sustrato. Salida directa al ADC del ESP32, alimentación 3.3~V, disponible en laboratorio. \\
+\hline
+\end{tabularx}
+\end{table*}

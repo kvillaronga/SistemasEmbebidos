@@ -1,0 +1,29 @@
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Parámetros de Conexión MQTT --- ThingSpeak}
+\label{tab:mqtt_params}
+\begin{tabularx}{\textwidth}{|c|X|}
+\hline
+\textbf{Parámetro} & \textbf{Valor} \\
+\hline
+Broker & \texttt{mqtt3.thingspeak.com} \\
+\hline
+Puerto & 1883 (TCP sin TLS) \\
+\hline
+Client ID & \texttt{<ThingSpeakClientID>} (generado en cuenta ThingSpeak) \\
+\hline
+Usuario & \texttt{<ThingSpeakUsername>} \\
+\hline
+Contraseña & \texttt{<API\_KEY\_Write\_del\_canal>} \\
+\hline
+Tópico de publicación & \texttt{channels/<channel\_id>/publish} \\
+\hline
+Formato del payload & \texttt{field1=28.5\&field2=71\&field3=65\&field4=0\&field5=1} \\
+\hline
+Intervalo mínimo & 15 segundos (restricción free-tier ThingSpeak) \\
+\hline
+Librería firmware & PubSubClient (Arduino/ESP32) \\
+\hline
+\end{tabularx}
+\end{table*}

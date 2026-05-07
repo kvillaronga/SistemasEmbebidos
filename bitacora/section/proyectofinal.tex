@@ -1,0 +1,237 @@
+% Esta sección describe el planteamiento del problema, objetivos y requisitos
+% del sistema embebido IoT para monitoreo y control automático de cultivos de perejil.
+
+% --- ESPACIADO GENERAL ---
+\setstretch{1.2}
+\setlength{\parskip}{6pt}
+
+% --- ESPACIADO EN LISTAS ---
+\setlist[itemize]{itemsep=6pt, topsep=6pt}
+\setlist[enumerate]{itemsep=6pt, topsep=6pt}
+
+% --- SANGRÍA ---
+\setlength{\parindent}{15pt}
+
+% ============================================================
+\subsection{Descripción del problema}
+% ============================================================
+
+En los cultivos de hortalizas a pequeña escala, el riego y el control ambiental se realizan de forma manual. En el caso específico del perejil (\textit{Petroselinum crispum}), esta situación es crítica porque la especie es sensible tanto a la deficiencia hídrica como al exceso de temperatura, lo que afecta directamente su germinación —requiere humedad constante del sustrato entre 60 y 80\,\%— y su desarrollo vegetativo —temperatura óptima entre 15 y 25\,°C—.
+
+El riego manual genera ineficiencias como uso excesivo o insuficiente del agua, variabilidad en la humedad del sustrato, estrés hídrico, exposición térmica no controlada y baja capacidad de seguimiento técnico del proceso. La ausencia de un mecanismo de protección solar automático agrava el problema durante las horas de alta irradiación.
+
+El Grupo~G5 diseñará e implementará un prototipo portable de semillero con geometría triangular equiláteral, base de 40\,cm y perímetro máximo de 160\,cm. El sistema contará con los siguientes componentes principales:
+
+\begin{itemize}
+    \item Tarjeta de desarrollo \textbf{ESP32-WROOM}.
+
+    \item Sensor \textbf{DHT11} para medición de temperatura y humedad relativa del aire.
+
+    \item Sensor \textbf{YL-100} para medición de humedad volumétrica del sustrato.
+
+    \item \textbf{Sistema de riego por goteo}: bomba sumergible de 5\,V con filtro de malla y tres goteros ajustables distribuidos sobre el sustrato.
+
+    \item \textbf{Techo móvil} accionado por un servo-motor SG90: se cierra automáticamente cuando la temperatura supera el umbral definido (\texttt{TEMP\_MAX}), protegiendo el cultivo de la irradiación solar directa, y se abre cuando la temperatura desciende por debajo de \texttt{TEMP\_MAX\,-\,HYSTERESIS\_T}.
+
+    \item Plataforma IoT \textbf{ThingSpeak} con publicación de datos vía protocolo \textbf{MQTT} (broker \texttt{mqtt3.thingspeak.com}).
+
+    \item Semilla de \textbf{perejil} (\textit{Petroselinum crispum}), suministrada por la docente encargada del proyecto.
+\end{itemize}
+
+\noindent\textbf{Problema central:} El cultivo experimental de perejil carece de un sistema automático capaz de mantener condiciones óptimas de humedad del sustrato y temperatura ambiental, activar el riego por goteo de forma autónoma, controlar un techo móvil para protección solar y visualizar remotamente el estado del sistema en ThingSpeak, reduciendo la necesidad de intervención manual continua.
+
+% ============================================================
+\subsection{Objetivos}
+% ============================================================
+
+\subsubsection{Objetivo general}
+
+Diseñar e implementar un sistema embebido IoT para el monitoreo remoto y control automático de variables asociadas al crecimiento de perejil en un prototipo triangular portable con techo móvil, integrando los sensores DHT11 y YL-100, actuadores de riego por goteo y servo-motor para el control del techo, comunicación inalámbrica Wi-Fi mediante ESP32-WROOM y visualización remota en ThingSpeak vía MQTT.
+
+\subsubsection{Objetivos específicos}
+
+\begin{enumerate}
+    \item Definir los requisitos funcionales y no funcionales del sistema, considerando las variables medidas por el DHT11 y el YL-100, y los requerimientos agronómicos de germinación y crecimiento del perejil.
+
+    \item Diseñar la arquitectura hardware/software y el diseño físico 3D del prototipo, justificando la selección de la tarjeta ESP32-WROOM, los sensores, los actuadores, el mecanismo de techo móvil y la plataforma ThingSpeak.
+
+    \item Implementar el prototipo funcional sobre el contenedor triangular, incorporando lógica de control con histéresis para el riego y la apertura/cierre del techo, y comunicación remota vía MQTT hacia ThingSpeak.
+
+    \item Validar el sistema mediante pruebas experimentales documentadas en bitácora técnica y repositorio GitHub con historial de commits organizado.
+\end{enumerate}
+
+\subsection{Requisitos funcionales}
+% ============================================================
+
+La Tabla~\ref{tab:rf_proyectofinal} presenta los requisitos funcionales identificados para el sistema, definidos mediante el código RF-XX.
+
+\input{tables/Table_RF_ProyectoFinal.tex}
+
+% ============================================================
+\subsection{Requisitos no funcionales}
+% ============================================================
+
+La Tabla~\ref{tab:rnf_proyectofinal} presenta los requisitos no funcionales identificados para el sistema, definidos mediante el código RNF-XX.
+
+\input{tables/Table_RNF_ProyectoFinal.tex}
+
+\subsection{Diagrama General del Sistema}
+% ============================================================
+
+\subsubsection{Arquitectura de Capas}
+El sistema se organiza en cuatro capas funcionales. El flujo de datos es bidireccional entre el ESP32 y ThingSpeak, y se organiza como se muestra en la Figura \ref{fig:diagrama-capas}.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\columnwidth]{images/diagrama-capas}
+    \caption{Arquitectura de capas del sistema}
+    \label{fig:diagrama-capas}
+\end{figure}
+
+\subsubsection{Variables del Sistema}
+
+Las variables mínimas del sistema se resumen en la Tabla~\ref{tab:variables_sistema}, con su tipo, sensor/actuador asociado, rango de valores y uso específico dentro del sistema.
+
+\input{tables/Table_VarFisc_ProyectoFinal.tex}
+
+\subsubsection{Flujo de Control del Firmware}
+
+El firmware opera con un bucle principal no bloqueante (millis()). En cada iteración se evalúan tres temporizadores independientes:
+
+\begin{itemize}
+    \item \textbf{Timer sensores (5/10 s):} llama a \texttt{readSensors()} --- lee DHT11 y YL-100, valida rangos.
+    \item \textbf{Timer control:} llama a \texttt{controlIrrigation()} con histéresis sobre \texttt{humedad\_sustrato}; luego \texttt{controlRoof()} con histéresis sobre temperatura; luego \texttt{updateActuators()} (GPIO relé + PWM servo).
+    \item \textbf{Timer IoT (15 s):} llama a \texttt{publishThingSpeak()} --- publica los 5 campos en el canal ThingSpeak vía MQTT.
+\end{itemize}
+
+\section{Diseño Físico 3D del Prototipo}
+
+\subsection{Descripción General}
+
+El prototipo es un semillero portable con base cuadrada y paredes de acrílico transparente, sostenido por una estructura de perfiles de aluminio extruido. La Figura~\ref{fig:vista-isometrica} muestra la vista isométrica del diseño en SolidWorks. El ensamble completo se compone de cuatro módulos: (1) contenedor cuadrado con sustrato y paredes transparentes para visualización de raíces, (2) sistema hidráulico de riego por goteo con tres ramales, (3) techo móvil triangular de acrílico accionado por servo-motor 
+MG995, y (4) caja electrónica lateral con ESP32-WROOM, pantalla OLED y módulo relé.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\columnwidth]{images/vista-isometrica.png}
+    \caption{Vista isométrica del prototipo: diseño en SolidWorks.}
+    \label{fig:vista-isometrica}
+\end{figure}
+
+\subsection{Contenedor}
+
+El contenedor tiene forma de prisma de base cuadrada con paredes de acrílico transparente de 3~mm, lo que permite la observación directa del sistema radicular del perejil. La estructura está reforzada con perfiles de aluminio extruido en los bordes. Sus dimensiones garantizan las restricciones del Acta~1, como se muestra en la Tabla~\ref{tab:dimensiones_contenedor}.
+
+\input{tables/Table_DimContenedor.tex}
+
+\subsection{Sistema Hidráulico de Riego por Goteo}
+
+El sistema de riego consiste en una bomba sumergible de 5~V conectada a una tubería principal de silicona ($\varnothing$~4~mm) que se distribuye en tres ramales, cada uno con un gotero ajustable posicionado sobre el sustrato. Antes del ingreso del agua a la línea principal se instala un filtro de malla para proteger los goteros de obstrucciones. Los componentes se detallan en la Tabla~\ref{tab:componentes_hidraulicos}.
+
+\input{tables/Table_CompHidraulico.tex}
+
+\subsection{Estructura Soporte y Techo Móvil}
+
+La estructura de soporte consiste en perfiles de aluminio extruido en los cuatro bordes verticales del contenedor. Sobre la parte superior se monta el mecanismo de techo móvil.
+
+El techo móvil es un panel triangular de acrílico transparente, unido al marco superior por una bisagra metálica en uno de los lados del cuadrado. El servo-motor MG995 está fijado en la esquina opuesta a la bisagra y controla la apertura y el cierre del panel:
+
+\begin{itemize}
+    \item \textbf{Servo a 0°:} techo completamente abierto (máxima ventilación y luz).
+    \item \textbf{Servo a 90°:} techo completamente cerrado (protección contra irradiación solar directa y exceso de temperatura).
+    \item La transición tarda menos de 3~s (RNF-09).
+\end{itemize}
+
+Las especificaciones del techo móvil y el servo se presentan en la Tabla~\ref{tab:techo_servo}.
+
+\input{tables/Table_TechoServo.tex}
+
+\subsection{Caja Electrónica}
+
+La electrónica del sistema se aloja en una caja de PVC o impresión 3D adosada lateralmente al contenedor triangular. La caja incluye:
+
+\begin{itemize}
+    \item Módulo ESP32-WROOM montado sobre protoboard o PCB perforada.
+    \item Módulo relé de 1 canal para la bomba de riego.
+    \item Conector para el servo MG995 (cable de 3 hilos: VCC, GND, PWM).
+    \item Sensor DHT11 con orificio de ventilación en la caja (exposición al aire).
+    \item Conector micro-USB para alimentación desde power bank.
+    \item Tornillos de acceso para mantenimiento.
+\end{itemize}
+
+La distribución de pines del ESP32-WROOM se presenta en la Tabla~\ref{tab:pines_esp32}.
+
+\input{tables/Table_PinesESP32.tex}
+
+\section{Selección Justificada de la Tarjeta}
+
+\subsection{Tarjeta Asignada: ESP32-WROOM}
+
+Conforme al Acta 1, el Grupo~G5 utiliza la tarjeta ESP32-WROOM. La Tabla~\ref{tab:comparativa_tarjetas} compara las tres opciones disponibles en el proyecto.
+
+\input{tables/Table_CompTarjetas.tex}
+
+\subsection{Justificación}
+
+\begin{enumerate}
+    \item \textbf{Conectividad Wi-Fi nativa:} elimina hardware adicional para la comunicación MQTT con ThingSpeak, reduciendo costo y complejidad del diseño.
+    \item \textbf{PWM para servo:} el módulo LEDC del ESP32 genera señales PWM de 50~Hz con resolución de 16 bits, ideal para el control preciso del servo SG90 del techo móvil.
+    \item \textbf{Librerías maduras para ThingSpeak:} PubSubClient permite la conexión al broker \texttt{mqtt3.thingspeak.com}; ArduinoJson facilita el formateo de payloads. Ambas están disponibles en PlatformIO.
+    \item \textbf{ADC de 12 bits:} la salida analógica del YL-100 se conecta directamente al GPIO~34 con rango 0--4095, sin circuito acondicionador adicional.
+    \item \textbf{Dual-core 240~MHz:} permite gestionar concurrentemente el control del servo, el riego, la lectura de sensores y la publicación MQTT sin bloqueos.
+\end{enumerate}
+
+\section{Sensores y Actuadores}
+
+\subsection{Sensores}
+
+La Tabla~\ref{tab:sensores} presenta los sensores utilizados en el sistema.
+
+\input{tables/Table_Sensores.tex}
+
+\noindent\textbf{Nota de calibración YL-100:} se tomarán lecturas ADC en sustrato seco (valor máximo $\approx$60\,\% escala) y sustrato saturado (valor mínimo) durante el Entregable~2 para definir \texttt{HUMIDITY\_MIN} y \texttt{HUMIDITY\_MAX}. El perejil requiere humedad del sustrato entre 60 y 80\,\% para germinación.
+
+\subsection{Actuadores}
+
+La Tabla~\ref{tab:actuadores} presenta los actuadores utilizados en el sistema.
+
+\input{tables/Table_Actuadores.tex}
+
+\section{Plataforma IoT --- ThingSpeak con MQTT}
+
+\subsection{Descripción de ThingSpeak}
+
+ThingSpeak es una plataforma IoT en la nube de MathWorks que permite recibir, almacenar y visualizar datos de sensores mediante canales con hasta 8 campos. Se integra nativamente con MATLAB para análisis y cuenta con soporte para el protocolo MQTT a través del broker \texttt{mqtt3.thingspeak.com} (puerto 1883 o 8883 TLS).
+
+Se utiliza la cuenta free-tier de ThingSpeak, que impone una tasa mínima de actualización de 15 segundos por canal, por lo que el timer IoT del firmware se configura con un intervalo de 15~s (RF-08, RNF-05).
+
+\subsection{Configuración del Canal ThingSpeak}
+
+La Tabla~\ref{tab:thingspeak_campos} presenta la configuración del canal ThingSpeak del Grupo~G5.
+
+\input{tables/Table_ThingSpeakCampos.tex}
+
+\subsection{Configuración MQTT}
+
+Los parámetros de conexión MQTT se presentan en la Tabla~\ref{tab:mqtt_params}.
+
+\input{tables/Table_MQTT.tex}
+
+\subsection{Visualización en ThingSpeak}
+
+Cada campo publicado se visualiza automáticamente en el dashboard del canal como gráfica de línea temporal. Se configurarán los siguientes widgets:
+
+\begin{itemize}
+    \item \textbf{Field~1 (temperatura):} gráfica de línea con banda de alerta a \texttt{TEMP\_MAX} = 25~°C.
+    \item \textbf{Field~2 (humedad aire):} gráfica de línea.
+    \item \textbf{Field~3 (humedad sustrato):} gráfica de línea con banda inferior a \texttt{HUMIDITY\_MIN} = 60~\%.
+    \item \textbf{Field~4 (bomba riego):} indicador numérico ON/OFF.
+    \item \textbf{Field~5 (estado techo):} indicador numérico ABIERTO/CERRADO.
+\end{itemize}
+
+\section{Partición Hardware/Software}
+
+La Tabla~\ref{tab:funciones_hardware} asigna las funciones al hardware y la Tabla~\ref{tab:funciones_firmware} al firmware.
+
+\input{tables/Table_HW_ProyectoFinal.tex}
+\input{tables/Table_FW_ProyectoFinal.tex}

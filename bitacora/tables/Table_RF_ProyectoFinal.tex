@@ -1,0 +1,37 @@
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Requisitos Funcionales del Sistema -- Grupo G5}
+\label{tab:rf_proyectofinal}
+\begin{tabularx}{\textwidth}{|c|X|c|c|}
+\hline
+\textbf{ID} & \textbf{Descripción} & \textbf{Prioridad} & \textbf{Fuente} \\
+\hline
+RF-01 & Leer temperatura ambiente con DHT11, mínimo 1 lectura cada 5 s. & Alta & Enunciado XI \\
+\hline
+RF-02 & Leer humedad relativa del aire con DHT11, misma frecuencia que RF-01. & Alta & Enunciado XI \\
+\hline
+RF-03 & Leer humedad del sustrato con YL-100 (salida analógica al ADC), mínimo 1 lectura cada 10 s. & Alta & Enunciado XI \\
+\hline
+RF-04 & Activar la bomba de riego por goteo cuando humedad\_sustrato < HUMIDITY\_MIN. & Alta & Enunciado XIII-A \\
+\hline
+RF-05 & Desactivar la bomba de riego cuando humedad\_sustrato > HUMIDITY\_MIN + HYSTERESIS. & Alta & Enunciado XIII-A \\
+\hline
+RF-06 & Cerrar el techo móvil (servo a 90°) cuando temperatura > TEMP\_MAX, para proteger el cultivo del calor y la irradiación solar directa. & Alta & Enunciado XIII-B / Acta 1 \\
+\hline
+RF-07 & Abrir el techo móvil (servo a 0°) cuando temperatura < TEMP\_MAX $-$ HYSTERESIS\_T. & Alta & Enunciado XIII-B \\
+\hline
+RF-08 & Publicar en ThingSpeak vía MQTT las 5 variables del sistema con intervalo máx. de 15 s. & Alta & Enunciado XIV / ThingSpeak API \\
+\hline
+RF-09 & Cada publicación IoT debe serializar los datos en formato de campo ThingSpeak (field1\ldots field5) compatible con mqtt3.thingspeak.com. & Alta & ThingSpeak Docs \\
+\hline
+RF-10 & Implementar temporización no bloqueante con millis() --- sin uso de delay() en el bucle principal. & Alta & Enunciado XVI \\
+\hline
+RF-11 & Incluir filtro mecánico del agua (malla) antes de la línea de riego por goteo. & Alta & Acta 1 núm. 8 \\
+\hline
+RF-12 & Operar sobre contenedor triangular: base 40 cm, perímetro máx. 160 cm, altura sustrato mín. 10 cm. & Alta & Acta 1 núm. 4, 6 \\
+\hline
+RF-13 & Organizar firmware en módulos: readSensors(), controlIrrigation(), controlRoof(), publishThingSpeak(), updateActuators(). & Media & Enunciado XVI \\
+\hline
+\end{tabularx}
+\end{table*}

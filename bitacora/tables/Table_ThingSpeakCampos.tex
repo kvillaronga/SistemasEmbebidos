@@ -1,0 +1,21 @@
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Configuración del Canal ThingSpeak --- Grupo G5}
+\label{tab:thingspeak_campos}
+\begin{tabularx}{\textwidth}{|c|c|X|}
+\hline
+\textbf{Campo (Field)} & \textbf{Variable publicada} & \textbf{Descripción} \\
+\hline
+field1 & \texttt{temperatura} & Temperatura ambiente en °C (float, 1 decimal) \\
+\hline
+field2 & \texttt{humedad\_aire} & Humedad relativa del aire en \% (float, 0 decimales) \\
+\hline
+field3 & \texttt{humedad\_sustrato} & Humedad del sustrato en \% escalado (float, 0--100) \\
+\hline
+field4 & \texttt{estado\_bomba} & Estado de la bomba de riego: 1 = ON, 0 = OFF (int) \\
+\hline
+field5 & \texttt{estado\_techo} & Estado del techo: 1 = CERRADO, 0 = ABIERTO (int) \\
+\hline
+\end{tabularx}
+\end{table*}

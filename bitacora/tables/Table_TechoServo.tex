@@ -1,0 +1,27 @@
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Especificaciones del Techo Móvil y Servo}
+\label{tab:techo_servo}
+\begin{tabularx}{\textwidth}{|c|c|X|}
+\hline
+\textbf{Parámetro} & \textbf{Valor} & \textbf{Observación} \\
+\hline
+Actuador & Servo MG995 & Torque 1.8 kg$\cdot$cm @ 5 V; control PWM 50 Hz \\
+\hline
+Pin de control & GPIO 25 (ESP32) & Señal PWM: pulso 1 ms (0°) --- 2 ms (90°) \\
+\hline
+Posición ABIERTO & 0° (servo) & Techo en posición horizontal, paralelo al suelo \\
+\hline
+Posición CERRADO & 90° (servo) & Panel cubre el cultivo completamente \\
+\hline
+Material del panel & Acrílico opaco 3 mm & Bloquea irradiación solar directa \\
+\hline
+Fijación bisagra & Lado A del triángulo (40 cm) & Bisagra metálica de piano, resistente a la humedad \\
+\hline
+Umbral cierre & Temperatura $>$ \texttt{TEMP\_MAX} (25°C) & Configurable en \texttt{config.h} \\
+\hline
+Umbral apertura & Temperatura $<$ \texttt{TEMP\_MAX} $-$ \texttt{HYSTERESIS\_T} (22°C) & Con histéresis de 3°C por defecto \\
+\hline
+\end{tabularx}
+\end{table*}

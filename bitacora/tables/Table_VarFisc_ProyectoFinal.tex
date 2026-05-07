@@ -1,0 +1,21 @@
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Variables Mínimas del Sistema}
+\label{tab:variables_sistema}
+\begin{tabularx}{\textwidth}{|c|c|c|c|X|}
+\hline
+\textbf{Variable} & \textbf{Tipo} & \textbf{Sensor/Actuador} & \textbf{Rango} & \textbf{Uso} \\
+\hline
+temperatura & Entrada & DHT11 & 0--50 °C & Control techo / monitoreo \\
+\hline
+humedad\_aire & Entrada & DHT11 & 20--90 \%HR & Monitoreo ambiental \\
+\hline
+humedad\_sustrato & Entrada & YL-100 (ADC) & 0--4095 (12-bit) & Activación riego \\
+\hline
+estado\_bomba & Salida & Relé + bomba & ON / OFF & Control irrigación \\
+\hline
+estado\_techo & Salida & Servo-motor & ABIERTO / CERRADO & Protección térmica/solar \\
+\hline
+\end{tabularx}
+\end{table*}

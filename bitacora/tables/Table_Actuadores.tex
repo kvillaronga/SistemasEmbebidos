@@ -1,0 +1,18 @@
+% Table_Actuadores.tex
+\begin{table*}[tp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\caption{Actuadores del Sistema}
+\label{tab:actuadores}
+\begin{tabularx}{\textwidth}{|c|c|X|}
+\hline
+\textbf{Componente} & \textbf{Control / Alimentación} & \textbf{Función y justificación} \\
+\hline
+Bomba sumergible 5~V & Relé ch1 + GPIO~26 / 5~V DC $\sim$300~mA & Riego por goteo (3 goteros). Control on/off mediante relé. \\
+\hline
+Servo-motor SG90 & PWM GPIO~25 (50~Hz) / 5~V DC $\sim$250~mA & Apertura/cierre del techo móvil. Torque 1.8~kg$\cdot$cm, control angular preciso. \\
+\hline
+Módulo relé 1 canal & GPIO 3.3~V (trigger LOW) / 5~V bobina & Aislamiento ESP32--bomba. Optoacoplador protege el ESP32. \\
+\hline
+\end{tabularx}
+\end{table*}

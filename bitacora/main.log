@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  7 MAY 2026 00:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  7 MAY 2026 11:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -409,45 +409,50 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box108
 \@float@everytoks=\toks32
 \@floatcapt=\box109
-) (/usr/local/texlive/2026/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
-Package: algpseudocode 
+) (/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
  (/usr/local/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks33
+\c@algorithm=\count325
 ) (/usr/local/texlive/2026/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count325
-\c@ALG@rem=\count326
-\c@ALG@nested=\count327
+\c@ALG@line=\count326
+\c@ALG@rem=\count327
+\c@ALG@nested=\count328
 \ALG@tlm=\skip64
 \ALG@thistlm=\skip65
-\c@ALG@Lnr=\count328
-\c@ALG@blocknr=\count329
-\c@ALG@storecount=\count330
-\c@ALG@tmpcounter=\count331
+\c@ALG@Lnr=\count329
+\c@ALG@blocknr=\count330
+\c@ALG@storecount=\count331
+\c@ALG@tmpcounter=\count332
 \ALG@tmplength=\skip66
-)
+) (/usr/local/texlive/2026/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count332
+\lst@mode=\count333
 \lst@gtempboxa=\box110
-\lst@token=\toks33
-\lst@length=\count333
+\lst@token=\toks34
+\lst@length=\count334
 \lst@currlwidth=\dimen276
-\lst@column=\count334
-\lst@pos=\count335
+\lst@column=\count335
+\lst@pos=\count336
 \lst@lostspace=\dimen277
 \lst@width=\dimen278
-\lst@newlines=\count336
-\lst@lineno=\count337
+\lst@newlines=\count337
+\lst@lineno=\count338
 \lst@maxwidth=\dimen279
  (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstpatch.sty
 File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
 ) (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
-\c@lstnumber=\count338
-\lst@skipnumbers=\count339
+\c@lstnumber=\count339
+\lst@skipnumbers=\count340
 \lst@framebox=\box111
 ) (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2025/11/14 1.11b listings configuration
@@ -491,16 +496,16 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (/usr/local/texlive/2026/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count340
+\c@section@level=\count341
 ) (/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count341
+\etb@tempcnta=\count342
 ) (/usr/local/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \@linkdim=\dimen280
-\Hy@linkcounter=\count342
-\Hy@pagecounter=\count343
+\Hy@linkcounter=\count343
+\Hy@pagecounter=\count344
  (/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -508,7 +513,7 @@ Now handling font encoding PD1 ...
 ) (/usr/local/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count344
+\Hy@SavedSpaceFactor=\count345
  (/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -521,7 +526,7 @@ Package hyperref Info: Plain pages OFF on input line 4216.
 Package hyperref Info: Backreferencing OFF on input line 4221.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4468.
-\c@Hy@tempcnt=\count345
+\c@Hy@tempcnt=\count346
  (/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -533,7 +538,7 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (/usr/local/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count346
+\Fld@menulength=\count347
 \Field@Width=\dimen282
 \Fld@charsize=\dimen283
 Package hyperref Info: Hyper figures OFF on input line 6084.
@@ -543,15 +548,15 @@ Package hyperref Info: backreferencing OFF on input line 6099.
 Package hyperref Info: Link coloring OFF on input line 6104.
 Package hyperref Info: Link coloring with OCG OFF on input line 6109.
 Package hyperref Info: PDF/A mode OFF on input line 6114.
-\Hy@abspage=\count347
-\c@Item=\count348
-\c@Hfootnote=\count349
+\Hy@abspage=\count348
+\c@Item=\count349
+\c@Hfootnote=\count350
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
-\Fld@listcount=\count350
-\c@bookmark@seq@number=\count351
+\Fld@listcount=\count351
+\c@bookmark@seq@number=\count352
  (/usr/local/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
  (/usr/local/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -561,325 +566,63 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 \Hy@SectionHShift=\skip67
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 42.
-Package hyperref Info: Option `breaklinks' set `true' on input line 42.
+Package hyperref Info: Option `colorlinks' set `true' on input line 43.
+Package hyperref Info: Option `breaklinks' set `true' on input line 43.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2026/03/08 line numbers on paragraphs v5.9
-\linenopenalty=\count352
-\output=\toks34
-\linenoprevgraf=\count353
+\linenopenalty=\count353
+\output=\toks35
+\linenoprevgraf=\count354
 \linenumbersep=\dimen284
 \linenumberwidth=\dimen285
-\c@linenumber=\count354
-\c@pagewiselinenumber=\count355
-\c@LN@truepage=\count356
-\c@internallinenumber=\count357
-\c@internallinenumbers=\count358
+\c@linenumber=\count355
+\c@pagewiselinenumber=\count356
+\c@LN@truepage=\count357
+\c@internallinenumber=\count358
+\c@internallinenumbers=\count359
 \quotelinenumbersep=\dimen286
 \bframerule=\dimen287
 \bframesep=\dimen288
 \bframebox=\box112
-\@LN@amsmath@ams@eqpen=\count359
-) (/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty
-Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count360
-\c@ALC@line=\count361
-\c@ALC@rem=\count362
-\c@ALC@depth=\count363
-\ALC@tlm=\skip68
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:51: LaTeX Error: Command \algorithmicindent already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.51 \newlength{\algorithmicindent}
-                                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:52: LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.52 \setlength{\algorithmicindent}{0pt}
-                                        
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:66: LaTeX Error: Command \algorithmicrequire already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.66 ...nd{\algorithmicrequire}{\textbf{Require:}}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:67: LaTeX Error: Command \algorithmicensure already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.67 ...mand{\algorithmicensure}{\textbf{Ensure:}}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:68: LaTeX Error: Command \algorithmiccomment already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.68 \newcommand{\algorithmiccomment}[1]{\{#1\}}
-                                                
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:69: LaTeX Error: Command \algorithmicend already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.69 \newcommand{\algorithmicend}{\textbf{end}}
-                                               
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:70: LaTeX Error: Command \algorithmicif already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.70 \newcommand{\algorithmicif}{\textbf{if}}
-                                             
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:71: LaTeX Error: Command \algorithmicthen already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.71 \newcommand{\algorithmicthen}{\textbf{then}}
-                                                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:72: LaTeX Error: Command \algorithmicelse already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.72 \newcommand{\algorithmicelse}{\textbf{else}}
-                                                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:75: LaTeX Error: Command \algorithmicfor already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.75 \newcommand{\algorithmicfor}{\textbf{for}}
-                                               
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:76: LaTeX Error: Command \algorithmicforall already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.76 ...mand{\algorithmicforall}{\textbf{for all}}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:77: LaTeX Error: Command \algorithmicdo already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.77 \newcommand{\algorithmicdo}{\textbf{do}}
-                                             
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:79: LaTeX Error: Command \algorithmicwhile already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 ...command{\algorithmicwhile}{\textbf{while}}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:81: LaTeX Error: Command \algorithmicloop already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.81 \newcommand{\algorithmicloop}{\textbf{loop}}
-                                                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:83: LaTeX Error: Command \algorithmicrepeat already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.83 ...mmand{\algorithmicrepeat}{\textbf{repeat}}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:84: LaTeX Error: Command \algorithmicuntil already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.84 ...command{\algorithmicuntil}{\textbf{until}}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:86: LaTeX Error: Command \algorithmicreturn already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.86 ...mmand{\algorithmicreturn}{\textbf{return}}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty:229: LaTeX Error: Command \algorithmic already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.229 {\end{list}}
-                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-)) (/usr/local/texlive/2026/texmf-dist/tex/latex/algorithms/algorithm.sty
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
-\@float@every@algorithm=\toks35
-\c@algorithm=\count364
-) (/usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+\@LN@amsmath@ams@eqpen=\count360
+)) (/usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count365
+\l__color_backend_stack_int=\count361
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 -- Lines per column: 56 (exact).
 (/usr/local/texlive/2026/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count366
+\scratchcounter=\count362
 \scratchdimen=\dimen289
 \scratchbox=\box113
-\nofMPsegments=\count367
-\nofMParguments=\count368
+\nofMPsegments=\count363
+\nofMParguments=\count364
 \everyMPshowfont=\toks36
-\MPscratchCnt=\count369
+\MPscratchCnt=\count365
 \MPscratchDim=\dimen290
-\MPnumerator=\count370
-\makeMPintoPDFobject=\count371
+\MPnumerator=\count366
+\makeMPintoPDFobject=\count367
 \everyMPtoPDFconversion=\toks37
 ) (/usr/local/texlive/2026/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -887,39 +630,15 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-\c@lstlisting=\count372
-Package hyperref Info: Link coloring ON on input line 20.
+\c@lstlisting=\count368
+Package hyperref Info: Link coloring ON on input line 18.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-Package hyperref Info: Option `breaklinks' set `true' on input line 23.
- [1
-
-{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc}
-
-] (./section/abstract.tex) (./section/introduction.tex
-
-LaTeX Warning: Reference `sec:experimental' on page 2 undefined on input line 9.
-
-
-LaTeX Warning: Reference `sec:metodologia' on page 2 undefined on input line 9.
-
-
-LaTeX Warning: Citation `Cooley1965' on page 2 undefined on input line 13.
-
-
-LaTeX Warning: Citation `Geron2019' on page 2 undefined on input line 13.
-
-) (./section/literature.tex
-
-LaTeX Warning: Citation `Cooley1965' on page 2 undefined on input line 4.
-
-
-LaTeX Warning: Citation `Geron2019' on page 2 undefined on input line 4.
-
-) (./section/MarcoTeo.tex
-<images/problem_diagram.png, id=80, 445.665pt x 545.03625pt>
+Package hyperref Info: Option `breaklinks' set `true' on input line 21.
+ (./section/abstract.tex) (./section/introduction.tex) (./section/literature.tex) (./section/MarcoTeo.tex
+<images/problem_diagram.png, id=188, 445.665pt x 545.03625pt>
 File: images/problem_diagram.png Graphic file (type png)
 <use images/problem_diagram.png>
 Package pdftex.def Info: images/problem_diagram.png  used on input line 24.
@@ -927,7 +646,8 @@ Package pdftex.def Info: images/problem_diagram.png  used on input line 24.
 LaTeX Font Info:    Trying to load font information for T1+pcr on input line 25.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) [2
+) [1{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc}
+
 
 ]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
@@ -935,8 +655,8 @@ LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 55.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [3 <./images/problem_diagram.png>]
-<images/solution_diagram.png, id=109, 565.11125pt x 489.83pt>
+)
+<images/solution_diagram.png, id=211, 565.11125pt x 489.83pt>
 File: images/solution_diagram.png Graphic file (type png)
 <use images/solution_diagram.png>
 Package pdftex.def Info: images/solution_diagram.png  used on input line 59.
@@ -948,17 +668,17 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [4 <./images/solution_diagram.png>]) (./section/Talleres.tex (./section/subsections/Reto1.tex (./tables/Table_1_R1.tex) [5] (./Codes/Code_1_R1.tex
+) [2 <./images/problem_diagram.png>] [3 <./images/solution_diagram.png>]) (./section/Talleres.tex (./section/subsections/Reto1.tex (./tables/Table_1_R1.tex) (./Codes/Code_1_R1.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 2.
-) (./tables/Table_2_R1.tex
-Overfull \hbox (31.53886pt too wide) in paragraph at lines 8--21
+) [4] (./tables/Table_2_R1.tex
+Overfull \hbox (11.62202pt too wide) in paragraph at lines 8--21
  [][] 
  []
 
-) (./tables/Table_3_R1.tex)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+) (./tables/Table_3_R1.tex) [5]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 106.
@@ -971,7 +691,6 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 106.
-[6{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 107.
@@ -990,7 +709,7 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 109.
-<images/Imagen_1R1.png, id=163, 564.86232pt x 368.86607pt>
+<images/Imagen_1R1.png, id=273, 564.86232pt x 368.86607pt>
 File: images/Imagen_1R1.png Graphic file (type png)
 <use images/Imagen_1R1.png>
 Package pdftex.def Info: images/Imagen_1R1.png  used on input line 116.
@@ -1002,12 +721,12 @@ Overfull \hbox (8.00244pt too wide) in paragraph at lines 12--13
 [][][][][][][][][][][][][][][][][] 
  []
 
-[7 <./images/Imagen_1R1.png>] [8] [9])) (./section/subsections/Reto2.tex (./tables/Table_1_R2.tex
+[6{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/Imagen_1R1.png>] [7] [8])) (./section/subsections/Reto2.tex (./tables/Table_1_R2.tex
 Overfull \hbox (3.25473pt too wide) in paragraph at lines 28--28
 []|\T1/ptm/m/n/8 UMBRAL_ADVERTENCIA| 
  []
 
-) (./Codes/Code1_R2.tex) (./tables/Table_2_R2.tex) [10]
+) (./Codes/Code1_R2.tex) (./tables/Table_2_R2.tex) [9]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 78.
@@ -1044,12 +763,12 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 82.
-<images/Imagen_1R2.png, id=446, 705.3552pt x 371.75688pt>
+<images/Imagen_1R2.png, id=557, 705.3552pt x 371.75688pt>
 File: images/Imagen_1R2.png Graphic file (type png)
 <use images/Imagen_1R2.png>
 Package pdftex.def Info: images/Imagen_1R2.png  used on input line 87.
 (pdftex.def)             Requested size: 252.0pt x 132.81699pt.
- (./Codes/Code2_R2.tex [11 <./images/Imagen_1R2.png>]
+ (./Codes/Code2_R2.tex [10 <./images/Imagen_1R2.png>]
 Overfull \hbox (6.00232pt too wide) in paragraph at lines 16--17
 [][][][][][][][][][][][] 
  []
@@ -1079,17 +798,17 @@ Overfull \hbox (12.00238pt too wide) in paragraph at lines 67--68
 [][][][][][][][][][] 
  []
 
-[12]
+[11]
 Overfull \hbox (30.00256pt too wide) in paragraph at lines 112--113
 [][][][][][][][][][][][] 
  []
 
-)) (./section/subsections/Reto3.tex (./tables/Table_1_R3.tex) (./Codes/Code1_R3.tex) [13] (./tables/Table_2_R3.tex) (./tables/Table_3_R3.tex
+)) (./section/subsections/Reto3.tex (./tables/Table_1_R3.tex) (./Codes/Code1_R3.tex) [12] (./tables/Table_2_R3.tex) (./tables/Table_3_R3.tex
 Overfull \hbox (3.65367pt too wide) in paragraph at lines 35--35
 []|\T1/ptm/b/n/10 Especificación| 
  []
 
-) [14]
+) [13]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 92.
@@ -1126,7 +845,7 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 100.
-<images/Imagen_1R3.png, id=598, 733.10687pt x 391.99248pt>
+<images/Imagen_1R3.png, id=708, 733.10687pt x 391.99248pt>
 File: images/Imagen_1R3.png Graphic file (type png)
 <use images/Imagen_1R3.png>
 Package pdftex.def Info: images/Imagen_1R3.png  used on input line 110.
@@ -1135,7 +854,7 @@ Package pdftex.def Info: images/Imagen_1R3.png  used on input line 110.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-(./Codes/Code2_R3.tex [15 <./images/Imagen_1R3.png>]
+(./Codes/Code2_R3.tex [14 <./images/Imagen_1R3.png>]
 Overfull \hbox (14.0025pt too wide) in paragraph at lines 68--69
 [][][][][][][][][][][][][] 
  []
@@ -1145,7 +864,7 @@ Overfull \hbox (14.0025pt too wide) in paragraph at lines 77--78
 [][][][][][][][][][][][][] 
  []
 
-[16]
+[15]
 Overfull \hbox (2.00238pt too wide) in paragraph at lines 108--109
 [][][][][][][][][][] 
  []
@@ -1155,12 +874,19 @@ Overfull \hbox (8.00244pt too wide) in paragraph at lines 117--118
 [][][][][][][][][][][][][][][][][][] 
  []
 
-[17]))) (./section/protocolosDeCom.tex (./tables/Table_4_PDCIoT.tex
-Overfull \hbox (0.58383pt too wide) in paragraph at lines 19--20
-[]|\T1/ptm/m/n/10 Identificación,
- []
-
-) [18]) (./section/iotVSint.tex [19] [20]) (./section/results.tex) (./section/conclusions.tex) (./section/acknoledgment.tex) (./main.bbl)
+[16]))) (./section/protocolosDeCom.tex (./tables/Table_4_PDCIoT.tex) [17]) (./section/iotVSint.tex [18] [19]) (./section/proyectoFinal.tex [20] (./tables/Table_RF_ProyectoFinal.tex) (./tables/Table_RNF_ProyectoFinal.tex)
+<images/diagrama-capas.png, id=963, 1129.21875pt x 828.09375pt>
+File: images/diagrama-capas.png Graphic file (type png)
+<use images/diagrama-capas.png>
+Package pdftex.def Info: images/diagrama-capas.png  used on input line 86.
+(pdftex.def)             Requested size: 252.0pt x 184.79677pt.
+ (./tables/Table_VarFisc_ProyectoFinal.tex)
+<images/vista-isometrica.png, id=966, 1445.4pt x 813.0375pt>
+File: images/vista-isometrica.png Graphic file (type png)
+<use images/vista-isometrica.png>
+Package pdftex.def Info: images/vista-isometrica.png  used on input line 116.
+(pdftex.def)             Requested size: 252.0pt x 141.75023pt.
+ (./tables/Table_DimContenedor.tex) [21 <./images/diagrama-capas.png (PNG copy)> <./images/vista-isometrica.png (PNG copy)>] (./tables/Table_CompHidraulico.tex) (./tables/Table_TechoServo.tex) [22] [23] (./tables/Table_PinesESP32.tex) (./tables/Table_CompTarjetas.tex) [24] (./tables/Table_Sensores.tex) (./tables/Table_Actuadores.tex) (./tables/Table_ThingSpeakCampos.tex) (./tables/Table_MQTT.tex [25]) (./tables/Table_HW_ProyectoFinal.tex) (./tables/Table_FW_ProyectoFinal.tex)) (./section/results.tex) (./section/conclusions.tex) [26] [27] (./section/acknoledgment.tex) (./main.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1172,31 +898,29 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[21] (./main.aux)
+[28
+
+] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 2F0802659A744A9A1C58560CCAECBAB3;3357.
+(rerunfilecheck)             Checksum: 043048DCFF73B7C0F23A83BF53FCD36E;8519.
  ) 
 Here is how much of TeX's memory you used:
- 17596 strings out of 467525
- 274454 string characters out of 5418982
- 778929 words of memory out of 5000000
- 45518 multiletter control sequences out of 15000+600000
- 744890 words of font info for 163 fonts, out of 8000000 for 9000
+ 17722 strings out of 467525
+ 278201 string characters out of 5418982
+ 779421 words of memory out of 5000000
+ 45539 multiletter control sequences out of 15000+600000
+ 745201 words of font info for 164 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,12n,82p,1066b,2210s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (21 pages, 528364 bytes).
+ 80i,15n,82p,1066b,2210s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (28 pages, 2723704 bytes).
 PDF statistics:
- 1045 PDF objects out of 1200 (max. 8388607)
- 978 compressed objects within 10 object streams
- 652 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1254 PDF objects out of 1440 (max. 8388607)
+ 1172 compressed objects within 12 object streams
+ 713 named destinations out of 1000 (max. 500000)
+ 404 words of extra memory for PDF output out of 10000 (max. 10000000)
 
