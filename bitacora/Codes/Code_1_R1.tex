@@ -1,0 +1,56 @@
+\begin{algorithm}[h]
+\caption{Algoritmo de Control de Acceso}
+\label{alg:Algoritmo1}
+\begin{algorithmic}[1]
+
+\Statex \textbf{Inicialización:}
+\State Inicializar pines, variables y servo en posición cerrada
+\State $intentosFallidos = 0$
+\State $sistemaBloqueado = false$
+
+\While{true}
+
+    \If{$sistemaBloqueado$}
+
+        \If{$millis() - tiempoBloqueo \geq 30000$}
+            \State $sistemaBloqueado = false$
+            \State $intentosFallidos = 0$
+            \State Apagar $LED\_ROJO$
+        \EndIf
+
+    \Else
+
+        \State Leer tecla del teclado
+        \State Agregar caracter a $contrasenaIngresada$
+
+        \If{$|contrasenaIngresada| = |contrasenaCorrecta|$}
+
+            \If{$contrasenaIngresada = contrasenaCorrecta$}
+
+                \State Activar servo (abrir cerradura)
+                \State Encender $LED\_VERDE$ durante 3 segundos
+                \State Regresar servo a posicion cerrada
+                \State $intentosFallidos = 0$
+
+            \Else
+
+                \State $intentosFallidos = intentosFallidos + 1$
+                \State Hacer parpadear $LED\_ROJO$
+
+                \If{$intentosFallidos \geq 3$}
+                    \State $sistemaBloqueado = true$
+                    \State $tiempoBloqueo = millis()$
+                \EndIf
+
+            \EndIf
+
+            \State $contrasenaIngresada = " "$
+
+        \EndIf
+
+    \EndIf
+
+\EndWhile
+
+\end{algorithmic}
+\end{algorithm}

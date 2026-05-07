@@ -1,0 +1,58 @@
+% ==================== PREÁMBULO ====================
+% Archivo para centralizar la configuración de paquetes y estilos del documento.
+
+% ----- IDIOMA Y CODIFICACIÓN -----
+\usepackage[T1]{fontenc}                % Codificación de fuentes para caracteres especiales.
+\usepackage[utf8]{inputenc}             % Codificación de entrada para acentos y eñes.
+\usepackage[spanish,english]{babel}
+
+%\usepackage[spanish,es-nosectiondot,es-lcroman]{babel} % Soporte para español.
+
+% ----- PAQUETES MATEMÁTICOS -----
+\usepackage{amsmath,amssymb,amsfonts}   % Símbolos y entornos matemáticos de AMS.
+
+% ----- FIGURAS Y GRÁFICOS -----
+\usepackage{graphicx}                   % Para incluir imágenes (jpg, png, etc.).
+\usepackage{xcolor}                     % Para definir y usar colores.
+\usepackage{setspace}                   % Para dejar espacio.
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% ----- TABLAS -----
+\usepackage{booktabs}                   % Líneas de calidad profesional en tablas.
+\usepackage{tabularx}                   % Tablas con columnas de ancho ajustable.
+\usepackage{multirow}                   % Celdas que ocupan múltiples filas.
+\usepackage{multicol}                   % Para usar múltiples columnas en el texto.
+\usepackage{threeparttable}             % Permite añadir notas al pie dentro de las tablas.
+\usepackage{float}                      % Mejora el control sobre la posición de flotantes (figuras, tablas).
+\usepackage{booktabs} % Para líneas más elegantes
+
+% ----- CODIGOS -----
+% \usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath} % Imprescindible para \text{}
+\usepackage{listings}
+
+% ----- BIBLIOGRAFÍA Y REFERENCIAS -----
+% \usepackage[numbers]{natbib}            % Gestión de bibliografía estilo autor-año o numérico.
+\usepackage{hyperref}                   % Creación de hipervínculos y referencias cruzadas.
+\hypersetup{
+  colorlinks=true,                    % Colorea los enlaces en lugar de usar recuadros.
+  breaklinks=true                     % Permite que los enlaces largos se dividan en varias líneas.
+}
+\usepackage{lineno}                     % Para numerar las líneas del documento.
+
+% ----- ALGORITMOS -----
+\usepackage{algorithmic}                % Para escribir pseudocódigo.
+
+% ----- AJUSTES TIPOGRÁFICOS -----
+\usepackage{etoolbox}                   % Herramientas de programación para LaTeX (usado para bibliografía).
+\hbadness=10000                         % Suprime advertencias de "underfull \hbox".
+\vbadness=10000                         % Suprime advertencias de "underfull \vbox".
+\tolerance=10000                        % Aumenta la tolerancia para evitar líneas que sobresalen del margen.
+
+% ==================== CONSEJOS RÁPIDOS ====================
+% - Citas: \cite{clave} o \citep{clave} con natbib.
+% - Figuras: \includegraphics[width=...]{ruta/figura.png} o entornos TikZ/PGF.
+% - Tablas: \begin{table} ... \end{table}, usando booktabs para mejor estilo.
+% - Compilación: Se recomienda usar latexmk o la secuencia pdflatex -> bibtex -> pdflatex -> pdflatex.

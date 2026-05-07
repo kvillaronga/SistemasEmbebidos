@@ -1,0 +1,29 @@
+
+
+\begin{table}[!ht]
+\centering
+\caption{Definición de Umbrales y Variables}
+\label{tab:Tabla_1_R2}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\columnwidth}{|p{3.2cm}|p{2cm}|X|}
+
+        \hline
+        \textbf{Variable} & \textbf{Valor} & \textbf{Descripción} \\ 
+
+        \hline UMBRAL\_ADVERTENCIA & const = 30°C & Umbral para activar advertencia \\ 
+
+        \hline UMBRAL\_CRITICO & const = 40°C & Umbral para nivel crítico \\ 
+
+        \hline HISTERESIS & const = 2°C & Margen para evitar fluctuaciones \\ 
+
+        \hline temperaturaActual & float & Valor del sensor en °C \\ 
+
+        \hline estadoActual & enum & NORMAL, ADVERTENCIA, CRÍTICO \\ 
+    
+        \hline tiempoUltimaLectura & unsigned long & Timestamp de la lectura \\ 
+        
+        \hline
+    \end{tabularx}
+\end{table}

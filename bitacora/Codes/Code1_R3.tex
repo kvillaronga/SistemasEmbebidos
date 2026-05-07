@@ -1,0 +1,47 @@
+\begin{algorithm}[ht]
+\caption{Algoritmo de Sistema de Riego Automático}
+\label{alg:Algoritmo_Riego}
+\begin{algorithmic}[1]
+\Statex \textbf{Inicialización:}
+\State Inicializar pines, YI69, relé en OFF y pantalla OLED
+\State $estadoRiego = IDLE$
+\State $bombaActiva = false$
+\While{true}
+    \If{$millis() - tiempoUltimaLectura \geq 2000$}
+        \State $tiempoUltimaLectura = millis()$
+        \State $humedadActual = dht.readHumidity()$
+        \If{$humedadActual = invalida$}
+            \State Mostrar error en OLED
+        \Else
+            \If{$estadoRiego = IDLE$}
+                \If{$humedadActual < UMBRAL\_ALARMA$}
+                    \State $estadoRiego = ALARMA$
+                    \State $activarBomba()$
+                \ElsIf{$humedadActual \leq UMBRAL\_SECO$}
+                    \State $estadoRiego = REGANDO$
+                    \State $activarBomba()$
+                    \State $tiempoInicioRiego = millis()$
+                \EndIf
+            \ElsIf{$estadoRiego = REGANDO$}
+                \If{$millis() - tiempoInicioRiego \geq tiempoMinRiego$}
+                    \If{$humedadActual \geq UMBRAL\_HUMEDO$}
+                        \State $estadoRiego = IDLE$
+                        \State $desactivarBomba()$
+                    \EndIf
+                \EndIf
+            \ElsIf{$estadoRiego = ALARMA$}
+                \State $activarBomba()$
+                \If{$humedadActual \geq (UMBRAL\_SECO + HISTERESIS)$}
+                    \State $estadoRiego = IDLE$
+                    \State $desactivarBomba()$
+                \EndIf
+            \EndIf
+            \State $actualizarIndicadores(estadoRiego)$
+            \State $mostrarP(humedadActual,\ estadoRiego)$
+        \EndIf
+    \EndIf
+    \State $gestionarBuzzerAlarma()$
+    \State $verificarBotonManual()$
+\EndWhile
+\end{algorithmic}
+\end{algorithm}

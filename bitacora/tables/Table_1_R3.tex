@@ -1,0 +1,23 @@
+\begin{table}[ht]
+\caption{Variables Involucradas (Sistema de Riego Automático)}
+\label{tab:Table_1_R3}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\columnwidth}{X p{2.0cm} p{2.0cm}}
+\toprule
+\textbf{Variable} & \textbf{Tipo} & \textbf{Valor / Rango} \\
+\midrule
+UMBRAL\_SECO   & const int    & 30\%       \\
+UMBRAL\_HUMEDO & const int    & 70\%       \\
+UMBRAL\_ALARMA & const int    & 20\%       \\
+HISTERESIS     & const int    & 5\%        \\
+humedadActual  & float        & 0--100\%   \\
+estadoRiego    & enum         & IDLE / REGANDO / ALARMA \\
+bombaActiva    & bool         & true / false \\
+tiempoInicioRiego & unsigned long & ms      \\
+tiempoMinRiego & const long   & 5000 ms    \\
+\midrule
+\textbf{Total} & \textbf{9 variables} & --- \\
+\bottomrule
+\end{tabularx}
+\end{table}

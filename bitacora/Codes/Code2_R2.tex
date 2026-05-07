@@ -1,0 +1,122 @@
+\begin{lstlisting}[caption={Sistema de Monitoreo de Temperatura con DHT11}, label={lst:monitoreo-temperatura}]
+#include <DHT.h>
+
+// --- Pines ---
+const int PIN_SENSOR       = 2;
+const int PIN_LED_VERDE    = 9;
+const int PIN_LED_AMARILLO = 10;
+const int PIN_LED_ROJO     = 11;
+const int PIN_BUZZER       = 8;
+
+// --- Configuracion DHT11 ---
+#define DHTTYPE DHT11
+DHT dht(PIN_SENSOR, DHTTYPE);
+
+// --- Umbrales de temperatura ---
+const float UMBRAL_ADVERTENCIA = 30.0;  
+const float UMBRAL_CRITICO     = 40.0;  
+const float HISTERESIS         = 2.0;   
+
+// --- Enumeracion de estados ---
+enum EstadoSistema 
+{ NORMAL, ADVERTENCIA, CRITICO };
+EstadoSistema estadoActual = NORMAL;
+
+// --- Variables de temporizacion ---
+unsigned long tiempoUltimaLectura = 0;
+const long    INTERVALO_LECTURA   = 2000;
+unsigned long tiempoBuzzer        = 0;
+bool          estadoBuzzer        = false;
+
+float leerTemperatura() {
+  float temp = dht.readTemperature();
+  if (isnan(temp)) {
+    Serial.println("Error al leer 
+    el DHT11");
+    return -999.0;
+  }
+  return temp;
+}
+
+void evaluarEstado(float temperatura) {
+  if (temperatura == -999.0) return;
+  switch (estadoActual) {
+    case NORMAL:
+      if (temperatura >= 
+      UMBRAL_ADVERTENCIA)
+        estadoActual = ADVERTENCIA;
+      break;
+    case ADVERTENCIA:
+      if (temperatura >= UMBRAL_CRITICO)
+        estadoActual = CRITICO;
+      else if (temperatura < 
+               UMBRAL_ADVERTENCIA 
+               - HISTERESIS)
+        estadoActual = NORMAL;
+      break;
+    case CRITICO:
+      if (temperatura < UMBRAL_CRITICO 
+      - HISTERESIS)
+        estadoActual = ADVERTENCIA;
+      break;
+  }
+}
+
+void actualizarLEDs() {
+  digitalWrite(PIN_LED_VERDE,
+               estadoActual == NORMAL);
+  digitalWrite(PIN_LED_AMARILLO,
+               estadoActual == 
+               ADVERTENCIA);
+  digitalWrite(PIN_LED_ROJO,
+               estadoActual == 
+               CRITICO);
+}
+
+void gestionarBuzzer() {
+  if (estadoActual == NORMAL) {
+    noTone(PIN_BUZZER);
+    return;
+  }
+  long intervalo = 
+    (estadoActual == ADVERTENCIA)
+    ? 1000 : 250;
+  if ((millis() - tiempoBuzzer)
+  >= intervalo) {
+    tiempoBuzzer = millis();
+    estadoBuzzer = !estadoBuzzer;
+    if (estadoBuzzer)
+      tone(PIN_BUZZER, 1500,
+      intervalo / 2);
+    else
+      noTone(PIN_BUZZER);
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+  pinMode(PIN_LED_VERDE,    OUTPUT);
+  pinMode(PIN_LED_AMARILLO, OUTPUT);
+  pinMode(PIN_LED_ROJO,     OUTPUT);
+  pinMode(PIN_BUZZER,       OUTPUT);
+  Serial.println("Sistema de 
+  Monitoreo - Activo");
+}
+
+void loop() {
+  unsigned long ahora = millis();
+  if (ahora - tiempoUltimaLectura >= 
+      INTERVALO_LECTURA) {
+    tiempoUltimaLectura = ahora;
+    float temperatura = leerTemperatura();
+    evaluarEstado(temperatura);
+    actualizarLEDs();
+    Serial.print("T=");
+    Serial.print(temperatura);
+    Serial.print(" Estado=");
+    Serial.println(estadoActual);
+  }
+  gestionarBuzzer();
+}
+\end{lstlisting}

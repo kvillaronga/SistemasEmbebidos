@@ -1,0 +1,254 @@
+\begin{lstlisting}[caption={Implementación de Control de Acceso con Teclado y Servo}, label={lst:control-acceso}]
+#include <Keypad.h>
+#include <Servo.h>
+
+// --- Definicion de pines ---
+#define PIN_SERVO       3
+#define PIN_BUZZER      2
+#define PIN_LED_VERDE   12
+#define PIN_LED_ROJO    13
+#define PIN_BOTON       A0
+
+// --- Configuracion del teclado 4x4 ---
+const byte FILAS    = 4;
+const byte COLUMNAS = 4;
+
+char teclas[FILAS][COLUMNAS] = {
+  { '1', '2', '3', 'A' },
+  { '4', '5', '6', 'B' },
+  { '7', '8', '9', 'C' },
+  { '*', '0', '#', 'D' }
+};
+
+byte pinesFilas[FILAS] =
+  { 11, 10, 9, 8 };
+byte pinesColumnas[COLUMNAS] =
+  {  7,  6, 5, 4 };
+
+Keypad teclado =
+  Keypad(makeKeymap(teclas),
+         pinesFilas,
+         pinesColumnas,
+         FILAS,
+         COLUMNAS);
+
+// --- Servo ---
+Servo servo;
+#define ANGULO_ABIERTO  90
+#define ANGULO_CERRADO   0
+
+// --- Variables de control de 
+acceso ---
+const String PASSWORD = "1234";
+const byte MAX_INTENTOS = 3;
+const unsigned long TIEMPO_BLOQUEO
+= 30000;
+
+// --- Estado general ---
+String entradaActual = "";
+byte intentosFallidos = 0;
+bool bloqueado = false;
+unsigned long tiempoBloqueo = 0;
+
+// --- Servo temporizado ---
+bool puertaAbierta = false;
+unsigned long tiempoServo = 0;
+
+// --- Buzzer no bloqueante ---
+bool buzzerActivo = false;
+unsigned long tiempoBeep = 0;
+int duracionBeep = 0;
+
+// --- Parpadeo LED rojo ---
+unsigned long tiempoBlink = 0;
+bool estadoBlink = false;
+byte parpadeosPendientes = 0;
+bool ledRojoFijo = false;
+
+// --- Anti-rebote boton ---
+unsigned long ultimoDebounce = 0;
+const unsigned long 
+DEBOUNCE_DELAY = 50;
+
+// ===================
+void inicializarHardware() {
+  pinMode(PIN_LED_VERDE, OUTPUT);
+  pinMode(PIN_LED_ROJO, OUTPUT);
+  pinMode(PIN_BUZZER, OUTPUT);
+  pinMode(PIN_BOTON, 
+  INPUT_PULLUP);
+  servo.attach(PIN_SERVO);
+  servo.write(ANGULO_CERRADO);
+  digitalWrite(PIN_LED_VERDE, LOW);
+  digitalWrite(PIN_LED_ROJO,  LOW);
+  Serial.println("Sistema de
+  acceso listo");
+}
+
+// ===================
+void beep(int frecuencia,
+          int duracion) {
+  tone(PIN_BUZZER, frecuencia);
+  buzzerActivo = true;
+  tiempoBeep   = millis();
+  duracionBeep = duracion;
+}
+
+// ===================
+void actualizarBuzzer() {
+  if (buzzerActivo) {
+    if (millis() - tiempoBeep
+        >= duracionBeep) {
+      noTone(PIN_BUZZER);
+      buzzerActivo = false;
+    }
+  }
+}
+
+// ===================
+void actualizarServo() {
+  if (puertaAbierta) {
+    if (millis() - tiempoServo
+        >= 3000) {
+      servo.write(ANGULO_CERRADO);
+      digitalWrite(PIN_LED_VERDE,
+      LOW);
+      puertaAbierta = false;
+    }
+  }
+}
+
+// ===================
+void actualizarBlink() {
+  if (!estadoBlink) return;
+  if (millis() - tiempoBlink < 300)
+    return;
+  tiempoBlink = millis();
+  bool ledActual =
+    digitalRead(PIN_LED_ROJO);
+  if (!ledActual) {
+    digitalWrite(PIN_LED_ROJO, HIGH);
+    parpadeosPendientes--;
+  } else {
+    if (parpadeosPendientes == 0) {
+      estadoBlink = false;
+      digitalWrite(PIN_LED_ROJO,
+        ledRojoFijo ? HIGH : LOW);
+    } else {
+      digitalWrite(PIN_LED_ROJO, LOW);
+    }
+  }
+}
+
+// ===================
+void accesoAprobado() {
+  intentosFallidos  = 0;
+  estadoBlink       = false;
+  ledRojoFijo       = false;
+  digitalWrite(PIN_LED_ROJO,  LOW);
+  digitalWrite(PIN_LED_VERDE, HIGH);
+  servo.write(ANGULO_ABIERTO);
+  puertaAbierta = true;
+  tiempoServo   = millis();
+  beep(2000, 150);
+}
+
+// ===================
+void accesoNegado() {
+  intentosFallidos++;
+  if (intentosFallidos < 
+  MAX_INTENTOS)
+  {
+    parpadeosPendientes = 2;
+    ledRojoFijo         = false;
+  } else {
+    parpadeosPendientes = 3;
+    ledRojoFijo         = true;
+  }
+  estadoBlink = true;
+  tiempoBlink = millis();
+  digitalWrite(PIN_LED_ROJO, LOW);
+  beep(500, 500);
+  if (intentosFallidos >= 
+  MAX_INTENTOS)
+  {
+    bloqueado     = true;
+    tiempoBloqueo = millis();
+  }
+}
+
+// ===================
+void verificarPassword() {
+  if (entradaActual == PASSWORD)
+    accesoAprobado();
+  else
+    accesoNegado();
+  entradaActual = "";
+}
+
+// ===================
+void procesarTecla(char tecla) {
+  if (tecla == '#') {
+    verificarPassword();
+    return;
+  }
+  if (tecla == '*') {
+    entradaActual = "";
+    beep(1000, 100);
+    return;
+  }
+  entradaActual += tecla;
+  if (entradaActual.length()
+      > PASSWORD.length()) {
+    entradaActual = "";
+    beep(500, 200);
+  }
+}
+
+// ===================
+void leerBoton() {
+  if (digitalRead(PIN_BOTON) == LOW) {
+    if (millis() - ultimoDebounce
+        > DEBOUNCE_DELAY) {
+      bloqueado        = false;
+      intentosFallidos = 0;
+      entradaActual    = "";
+      estadoBlink      = false;
+      ledRojoFijo      = false;
+      digitalWrite(PIN_LED_ROJO, LOW);
+      digitalWrite(PIN_LED_VERDE, 
+      LOW);
+      beep(1800, 200);
+      ultimoDebounce = millis();
+    }
+  }
+}
+
+// ===================
+void setup() {
+  Serial.begin(9600);
+  inicializarHardware();
+}
+
+// ===================
+void loop() {
+  actualizarBuzzer();
+  actualizarServo();
+  actualizarBlink();
+  leerBoton();
+  if (bloqueado) {
+    if (millis() - tiempoBloqueo
+        >= TIEMPO_BLOQUEO) {
+      bloqueado        = false;
+      intentosFallidos = 0;
+      estadoBlink      = false;
+      ledRojoFijo      = false;
+      digitalWrite(PIN_LED_ROJO, LOW);
+      beep(1500, 300);
+    }
+    return;
+  }
+  char tecla = teclado.getKey();
+  if (tecla) procesarTecla(tecla);
+}
+\end{lstlisting}

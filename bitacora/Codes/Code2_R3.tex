@@ -1,0 +1,213 @@
+\begin{lstlisting}[caption={Sistema de Riego Automatico con DHT11 y OLED}, label={lst:riego-automatico}]
+#include <DHT.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+// --- Definicion de pines ---
+const int PIN_SENSOR_HUMEDAD = 2;
+const int PIN_RELE           = 4;
+const int PIN_LED_VERDE      = 5;
+const int PIN_LED_AZUL       = 6;
+const int PIN_LED_ROJO       = 7;
+const int PIN_BUZZER         = 8;
+const int PIN_BOTON_MANUAL   = 3;
+// --- Configuracion DHT11 ---
+#define DHTTYPE DHT11
+DHT dht(PIN_SENSOR_HUMEDAD, DHTTYPE);
+// --- Configuracion OLED ---
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET    -1
+Adafruit_SSD1306 oled(SCREEN_WIDTH,
+                      SCREEN_HEIGHT,
+                      &Wire,
+                      OLED_RESET);
+// --- Umbrales de humedad ---
+const int UMBRAL_SECO   = 30;
+const int UMBRAL_HUMEDO = 70;
+const int UMBRAL_ALARMA = 20;
+const int HISTERESIS    = 5;
+// --- Temporizacion ---
+const long INTERVALO_LECTURA = 2000;
+const long TIEMPO_MIN_RIEGO  = 5000;
+// --- Enumeracion de estados ---
+enum EstadoRiego
+{ IDLE, REGANDO, ALARMA };
+EstadoRiego estadoRiego = IDLE;
+// --- Variables de control ---
+float         humedadActual       = 0.0;
+bool          bombaActiva         = false;
+unsigned long tiempoUltimaLectura = 0;
+unsigned long tiempoInicioRiego   = 0;
+unsigned long tiempoBuzzer        = 0;
+bool          estadoBuzzer        = false;
+float leerHumedad() {
+  float h = dht.readHumidity();
+  if (isnan(h)) {
+    Serial.println("Error DHT11");
+    oled.clearDisplay();
+    oled.setCursor(0, 0);
+    oled.println("Error sensor");
+    oled.println("DHT11 fallo");
+    oled.display();
+    return -1.0;
+  }
+  return h;
+}
+void activarBomba() {
+  if (!bombaActiva) {
+    digitalWrite(PIN_RELE, LOW);
+    bombaActiva       = true;
+    tiempoInicioRiego = millis();
+    Serial.println("BOMBA: ACTIVADA");
+  }
+}
+void desactivarBomba() {
+  if (bombaActiva) {
+    digitalWrite(PIN_RELE, HIGH);
+    bombaActiva = false;
+    Serial.println("BOMBA: DESACTIVADA");
+  }
+}
+void evaluarEstadoRiego() {
+  bool tiempoMinCumplido =
+    (millis() - tiempoInicioRiego)
+    >= TIEMPO_MIN_RIEGO;
+  switch (estadoRiego) {
+    case IDLE:
+      if (humedadActual < UMBRAL_ALARMA){
+        estadoRiego = ALARMA;
+        activarBomba();
+      } else if (humedadActual
+                 <= UMBRAL_SECO) {
+        estadoRiego = REGANDO;
+        activarBomba();
+      }
+      break;
+    case REGANDO:
+      if (tiempoMinCumplido &&
+          humedadActual >=
+          UMBRAL_HUMEDO) {
+        estadoRiego = IDLE;
+        desactivarBomba();
+      }
+      break;
+    case ALARMA:
+      activarBomba();
+      if (humedadActual >=
+         (UMBRAL_SECO + HISTERESIS)) {
+        estadoRiego = IDLE;
+        desactivarBomba();
+      }
+      break;
+  }
+}
+void actualizarIndicadores() {
+  digitalWrite(PIN_LED_VERDE,
+               estadoRiego == IDLE);
+  digitalWrite(PIN_LED_AZUL,
+               estadoRiego == REGANDO);
+  digitalWrite(PIN_LED_ROJO,
+               estadoRiego == ALARMA);
+}
+void gestionarBuzzerAlarma() {
+  if (estadoRiego != ALARMA) {
+    noTone(PIN_BUZZER);
+    return;
+  }
+  if ((millis() - tiempoBuzzer) >= 500){
+    tiempoBuzzer = millis();
+    estadoBuzzer = !estadoBuzzer;
+    if (estadoBuzzer)
+      tone(PIN_BUZZER, 880, 250);
+    else
+      noTone(PIN_BUZZER);
+  }
+}
+void verificarBotonManual() {
+  if (digitalRead(PIN_BOTON_MANUAL)
+      == LOW) {
+    delay(50);
+    if (digitalRead(PIN_BOTON_MANUAL)
+        == LOW) {
+      desactivarBomba();
+      estadoRiego = IDLE;
+      Serial.println(
+        "OVERRIDE: Riego detenido");
+    }
+  }
+}
+void mostrarEnOLED() {
+  oled.clearDisplay();
+  oled.setTextSize(1);
+  oled.setTextColor(SSD1306_WHITE);
+  oled.setCursor(0, 0);
+  oled.println("Sistema de Riego");
+  oled.drawLine(0, 10, 127, 10,
+                SSD1306_WHITE);
+  oled.setTextSize(2);
+  oled.setCursor(0, 16);
+  oled.print("Hum: ");
+  oled.print((int)humedadActual);
+  oled.println("%");
+  oled.setTextSize(1);
+  oled.setCursor(0, 40);
+  oled.print("Estado: ");
+  switch (estadoRiego) {
+    case IDLE:
+      oled.println("OPTIMO");   break;
+    case REGANDO:
+      oled.println("REGANDO");  break;
+    case ALARMA:
+      oled.println("ALARMA!");  break;
+  }
+  oled.setCursor(0, 52);
+  oled.print("Bomba: ");
+  oled.println(bombaActiva ?
+  "ON":"OFF");
+  oled.display();
+}
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+  pinMode(PIN_RELE,         OUTPUT);
+  pinMode(PIN_LED_VERDE,    OUTPUT);
+  pinMode(PIN_LED_AZUL,     OUTPUT);
+  pinMode(PIN_LED_ROJO,     OUTPUT);
+  pinMode(PIN_BUZZER,       OUTPUT);
+  pinMode(PIN_BOTON_MANUAL,
+  INPUT_PULLUP);
+  digitalWrite(PIN_RELE, HIGH);
+  oled.begin(SSD1306_SWITCHCAPVCC,
+             0x3C);
+  oled.clearDisplay();
+  oled.setTextSize(1);
+  oled.setTextColor(SSD1306_WHITE);
+  oled.setCursor(20, 20);
+  oled.println("Sistema Riego");
+  oled.setCursor(25, 35);
+  oled.println("Iniciando...");
+  oled.display();
+  delay(2000);
+  oled.clearDisplay();
+  Serial.println(
+    "Sistema de Riego - Listo");
+}
+void loop() {
+  unsigned long ahora = millis();
+  if (ahora - tiempoUltimaLectura
+      >= INTERVALO_LECTURA) {
+    tiempoUltimaLectura = ahora;
+    humedadActual = leerHumedad();
+    if (humedadActual < 0) return;
+    evaluarEstadoRiego();
+    actualizarIndicadores();
+    mostrarEnOLED();
+    Serial.print("Humedad: ");
+    Serial.print(humedadActual);
+    Serial.print("% | Estado: ");
+    Serial.println(estadoRiego);
+  }
+  gestionarBuzzerAlarma();
+  verificarBotonManual();
+}
+\end{lstlisting}

@@ -1,0 +1,102 @@
+\begin{itemize}
+    \item Análisis del problema
+        \begin{itemize}
+        
+            \item Descripción general:
+            El sistema de monitoreo con alarmas supervisa continuamente una variable física y clasifica su valor en tres niveles operativos: Normal, Advertencia y Crítico. Para cada nivel se activan indicadores visuales y/o sonoros diferenciados. Se implementa histéresis para evitar oscilaciones inestables en los umbrales de transición.
+
+        \end{itemize} 
+
+    \item Identificación de Entradas y Salidas
+        \begin{itemize}
+            
+            \item Entradas:
+                \begin{itemize}
+                    \item  Sensor de temperatura (señal analógica o digital).
+
+                    \item Botón de silencio de alarma (opcional).                   
+                \end{itemize}
+            
+            \item Salidas:
+                \begin{itemize}
+                    \item  LED verde: estado Normal.
+                    
+                    \item LED amarillo: estado Advertencia.    
+                    \item LED rojo: estado Crítico. 
+
+                    \item Buzzer: alarma sonora en Advertencia y Crítico.
+                    
+                \end{itemize}
+
+    \item Restricciones técnicas
+        \begin{itemize}
+            \item Los umbrales deben ser configurables mediante constantes.
+
+            \item Implementación obligatoria de histéresis para evitar inestabilidad en los límites.
+            
+            \item El sistema debe funcionar en ciclo continuo con temporización no bloqueante.
+            
+            \item La lectura del sensor debe ser promediada para reducir ruido.
+            
+        \end{itemize}
+       
+    \item Definición de umbrales y variables:
+
+    En la Tabla~\ref{tab:Tabla_1_R2}, se observa la definición de las variables con sus respectivas descripciones y justificación. Reconocer las variables a utilizar sera de ayuda a la hora de realizar el código.
+
+    \input{tables/Table_1_R2}
+
+    \item Flujograma del Sistema
+
+    El algoritmo, que se observa como Algoritmo ~\ref{alg:control_temp},
+    funciona en ciclo continuo, e implementa un sistema de monitoreo de temperatura basado en una máquina de estados con tres niveles: NORMAL, ADVERTENCIA y CRÍTICO. Cada 500 ms se realiza una nueva lectura del sensor, se calcula la temperatura y se determina el estado del sistema aplicando histéresis. En función del estado, se activan los indicadores correspondientes.
+    
+    \input{Codes/Code1_R2}
+
+    \item Justificación técnica del microcontrolador
+        \begin{itemize}
+            \item Microcontrolador Seleccionado: Arduino UNO (ATmega328P)
+
+            El mismo microcontrolador del reto anterior es suficiente para este segundo reto.  Para usar el DHT21, se requiere únicamente un pin digital con protocolo one-wire.
+
+            \item Análisis de Pines Requeridos:
+
+            En la Tabla~\ref{tab:Tabla_2_R2}, se observan los pines solicitados para el correcto funcionamiento del programa.
+
+            \input{tables/Table_2_R2}
+
+            \item Componentes auxiliares
+
+            El sistema emplea como elemento principal de medición un sensor de temperatura DHT21. La visualización de la información se realiza mediante monitor serial en el Arduino IDE, lo que optimiza el uso de pines del microcontrolador.
+            
+            Para la señalización del estado del sistema se utilizan tres LEDs de 5 mm (verde, amarillo y rojo) de 20 mA, cada uno con su respectiva resistencia limitadora de 220 ohms para protección. Además, se integra un buzzer activo de 5 V y aproximadamente 85 dB que funciona como alarma sonora en condiciones críticas, reforzando la advertencia al usuario.
+
+            \item Esquema de conexión 
+
+            En la Figura \ref{fig:Imagen_1R2} se observa el diagrama de conexión correspondiente al funcionamiento de este circuito, desarrollado a través del programa de circuitado. A continuación se mencionan las conexiones realizadas:
+            \begin{itemize}
+                \item Sensor DHT21: D2 → pin DATA (resistencia pull-up 10k ohms entre DATA y VCC), VCC a 5V, GND a GND
+                \item LED verde: D9 → 220 ohms → LED → GND
+                \item LED amarillo: D10 → 220 ohms → LED → GND
+                \item LED rojo: D11 → 220 ohms → LED → GND
+                \item Buzzer: D8 → buzzer (+) → GND
+            \end{itemize}
+            \textit{EasyEDA}.
+                  \begin{figure}[h]
+                  \centering
+                  \includegraphics[width=\columnwidth]{images/Imagen_1R2.png}
+                  \caption{Esquemático de Conexión Reto 2}
+                  \label{fig:Imagen_1R2}
+                  \end{figure}
+            
+        \end{itemize}
+
+    \item Código Documentado
+
+    El código propuesto documentado se encuentra registrado a continuación:
+    \input{Codes/Code2_R2}
+
+
+    
+    \end{itemize}  
+\end{itemize}

@@ -1,0 +1,66 @@
+\begin{itemize}
+
+    \item ¿Qué es el IoT y de dónde viene?
+
+    El término ``Internet de las Cosas'' fue acuñado por Kevin Ashton en 1999, en el contexto del MIT, para describir la idea de conectar objetos físicos a internet mediante etiquetas RFID. Su consolidación como paradigma tecnológico dependió del avance simultáneo de tres factores: el desarrollo de microcontroladores cada vez más pequeños, económicos y eficientes; la masificación de la conectividad inalámbrica; y la adopción del protocolo IPv6, que permitió asignar direcciones únicas a miles de millones de dispositivos. El cambio fundamental no fue solo conectar dispositivos, sino convertir el entorno físico en una fuente permanente de datos útiles para supervisión, decisión y acción.
+
+        \begin{itemize}
+
+            \item Diferencia conceptual entre los tres paradigmas
+
+            En el \textbf{internet tradicional}, la interacción ocurre entre personas y servicios web: el usuario consulta, descarga o accede a plataformas. Los datos son texto, imagen, audio o video, y el flujo es persona $\rightarrow$ red $\rightarrow$ servicio. La generación de datos depende completamente de la acción deliberada del usuario humano; sin interacción, no hay dato.
+
+            En el \textbf{IoT}, los objetos físicos captan, procesan y comunican datos de forma autónoma. El entorno físico se convierte en fuente permanente de información sin requerir intervención humana directa. El flujo cambia a: sensor $\rightarrow$ procesamiento $\rightarrow$ red $\rightarrow$ decisión $\rightarrow$ acción. Los datos dominantes son variables físicas del entorno como temperatura, humedad, presión o posición. Los objetivos son el monitoreo, control y automatización distribuida. Ejemplos representativos incluyen estaciones ambientales, casas inteligentes y sistemas de riego automatizado.
+
+            En el \textbf{IIoT} (Internet Industrial de las Cosas), los nodos se integran con máquinas, procesos industriales, líneas de producción, inventarios y sistemas de trazabilidad. Los datos dominantes son variables de proceso, estado de activos, calidad y trazabilidad productiva. El objetivo central es la optimización operativa, el mantenimiento predictivo, la eficiencia energética y la producción inteligente. A diferencia del IoT doméstico o académico, el IIoT opera bajo requisitos más estrictos de confiabilidad, latencia y seguridad.
+
+            En la \textbf{Industria 4.0}, el dato deja de ser solo un registro histórico y se convierte en base para analítica avanzada, interoperabilidad entre sistemas heterogéneos, decisión en tiempo real y automatización inteligente apoyada en inteligencia artificial y gemelos digitales.
+
+            \item IoT desde la perspectiva de sistemas embebidos
+
+            Un sistema embebido en el contexto IoT deja de ser un dispositivo aislado y se convierte en un nodo activo dentro de una arquitectura mayor. Para cumplir este rol, debe integrar cinco funciones fundamentales:
+
+                \begin{itemize}
+                    \item \textbf{Sensar:} captar variables físicas del entorno mediante sensores de temperatura, humedad, presión, corriente, vibración, posición, entre otros.
+                    \item \textbf{Procesar:} acondicionar, filtrar, escalar, convertir y organizar los datos dentro del microcontrolador o en una etapa de procesamiento en el borde (\textit{edge computing}).
+                    \item \textbf{Comunicar:} transmitir la información hacia otros nodos o hacia internet mediante un medio físico y un protocolo de aplicación apropiados al contexto.
+                    \item \textbf{Visualizar o almacenar:} presentar los datos al usuario final a través de dashboards o interfaces web, o registrarlos en bases de datos para análisis posterior.
+                    \item \textbf{Actuar:} ejecutar decisiones que modifiquen el proceso físico mediante relés, válvulas, motores, alarmas o consignas de control.
+                \end{itemize}
+
+            La idea clave es que el microcontrolador no es el sistema completo, sino únicamente el nodo local. El valor real del IoT aparece cuando el dato sale del dispositivo, viaja por la red, se integra con información de otros nodos y se convierte en conocimiento útil para tomar decisiones concretas.
+
+            \item Arquitectura por capas de un sistema IoT
+
+            Los sistemas IoT se organizan típicamente en una arquitectura de cuatro capas, cada una con una función específica dentro del flujo del dato:
+
+                \begin{itemize}
+                    \item \textbf{Capa física o de percepción:} contiene los sensores, actuadores, el microcontrolador, conversores ADC y pines GPIO. Es el punto de contacto directo con el mundo físico. Pregunta de diseño: ¿qué se mide, con qué precisión, con qué frecuencia de muestreo y qué variables se controlan?
+                    \item \textbf{Capa de comunicación:} se encarga de mover la información desde la capa física hacia internet o hacia otros nodos. Incluye tecnologías como Wi-Fi, BLE, Zigbee, LoRa, Ethernet, redes móviles y gateways intermediarios. Pregunta de diseño: ¿qué alcance se necesita, qué consumo energético es aceptable, qué protocolo conviene según el volumen y frecuencia de datos?
+                    \item \textbf{Capa de servicio:} gestiona la recepción, almacenamiento, procesamiento y protección de los datos. Incluye brokers MQTT, bases de datos relacionales o de series temporales, servidores web, APIs REST, dashboards de visualización, reglas de negocio y sistemas de alertas. Pregunta de diseño: ¿dónde se almacenan los datos, cómo se visualizan en tiempo real, qué nivel de seguridad y autenticación se requiere?
+                    \item \textbf{Capa de aplicación:} es la que entrega valor directo al usuario o al proceso. Habilita funciones de monitoreo remoto, control automatizado, predicción de fallos, mantenimiento preventivo, trazabilidad de activos y optimización logística. Pregunta de diseño: ¿qué decisión concreta permite tomar el sistema, qué indicador operativo mejora?
+                \end{itemize}
+
+            \item Transición IoT $\rightarrow$ IIoT $\rightarrow$ Industria 4.0 en síntesis
+
+                \begin{itemize}
+                    \item \textbf{IoT:} monitorea variables ambientales o de dispositivos individuales en contextos domésticos, urbanos o académicos. El alcance es limitado y los requisitos de confiabilidad son moderados.
+                    \item \textbf{IIoT:} integra datos de múltiples nodos distribuidos para mejorar productividad, disponibilidad de activos, seguridad operacional y calidad del producto en entornos industriales exigentes.
+                    \item \textbf{Industria 4.0:} el dato se convierte en el recurso central. Se habilitan capacidades de analítica avanzada, interoperabilidad entre sistemas heterogéneos, automatización inteligente y decisión en tiempo real apoyada en modelos predictivos.
+                \end{itemize}
+
+            \item Desafíos recurrentes que no deben ignorarse
+
+            Independientemente de la escala del sistema IoT, existen desafíos transversales que deben considerarse desde las etapas iniciales del diseño:
+
+                \begin{itemize}
+                    \item \textbf{Seguridad:} proteger credenciales de acceso, cifrar los canales de comunicación y controlar el acceso a los datos almacenados. Un sistema IoT mal asegurado representa un vector de ataque crítico.
+                    \item \textbf{Energía:} estimar el consumo de cada componente, definir la autonomía requerida y seleccionar el tipo de alimentación adecuado, especialmente en nodos remotos alimentados por batería o energía solar.
+                    \item \textbf{Robustez:} prever y gestionar situaciones de pérdida de conexión, reinicios inesperados, errores de lectura de sensores y condiciones ambientales adversas. El sistema debe recuperarse de forma autónoma.
+                    \item \textbf{Escalabilidad:} diseñar la arquitectura de modo que funcione correctamente con un nodo, con diez o con una red de cientos de dispositivos, sin requerir rediseños estructurales.
+                    \item \textbf{Mantenibilidad:} documentar con claridad las conexiones físicas, las variables del sistema, los formatos de mensaje, las versiones de librerías y las dependencias de software, para facilitar el mantenimiento y la actualización futura del sistema.
+                \end{itemize}
+
+        \end{itemize}
+
+\end{itemize}

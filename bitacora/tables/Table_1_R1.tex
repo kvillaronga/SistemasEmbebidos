@@ -1,0 +1,32 @@
+
+\begin{table}[h]
+\centering
+\caption{Variables del sistema de control de acceso}
+\label{tab:Tabla_1_R1}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+    
+    \begin{tabularx}{\columnwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{1.5cm}|X|}
+        \hline
+        \textbf{Variable} & \textbf{Tipo} & \textbf{Descripción} \\
+        
+        \hline
+        intentosFallidos & int & Contador de intentos incorrectos (0--3) \\ 
+        
+        \hline
+        contrasenaIngresada & String & Secuencia de teclas presionadas por el usuario \\ 
+        
+        \hline
+        contrasenaCorrecta & String & Contraseña almacenada en firmware \\ 
+        
+        \hline
+        sistemaBloqueado & bool & Indica si el sistema está en estado de bloqueo \\ 
+        
+        \hline
+        tiempoBloqueo & unsigned long & Marca de tiempo de inicio del bloqueo \\ 
+        
+        \hline
+        accesoGarantizado & bool & Indicador de acceso concedido \\ \hline
+\end{tabularx}
+\end{table}

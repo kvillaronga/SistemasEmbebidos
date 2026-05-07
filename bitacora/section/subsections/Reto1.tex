@@ -1,0 +1,133 @@
+
+
+\begin{itemize}
+    
+    \item Análisis del problema:
+    
+     El sistema de control de acceso tiene como propósito verificar una contraseña digital ingresada mediante una combinación de botones físicos o un teclado matricial. Si la combinación es correcta, se activa una cerradura electrónica (servo motor o relé); en caso contrario, se contabilizan los intentos fallidos y, al superar el límite permitido, el sistema entra en un estado de bloqueo temporal.
+     
+        \begin{itemize}
+             \item Identificación de Entradas y Salidas
+                  \begin{itemize}       
+                      \item Entradas del sistema:
+                    
+                            \begin{itemize}
+                                 \item  Botones digitales (4 pulsadores) o teclado matricial 4x4 para ingreso de contraseña.
+
+                                 \item Señal de reset (opcional): botón para reiniciar el sistema desde estado bloqueado.                      
+                             \end{itemize}  
+                             
+                  \end{itemize}     
+
+             \item Restricciones Técnicas
+                     \begin{itemize}
+                            \item Máximo 3 intentos fallidos antes de activar el bloqueo.
+                            
+                            \item Tiempo de bloqueo: 30 segundos.
+
+                            \item La contraseña debe almacenarse en memoria no volátil (EEPROM) o en código.
+                            
+                            \item Temporización no bloqueante mediante millis()
+
+                            \item El sistema debe retornar automáticamente al estado de espera tras el desbloqueo.
+                     \end{itemize}
+                     
+             \item Variables Involucradas
+                 \input{tables/Table_1_R1}
+          
+       \end{itemize}  
+\end{itemize}
+
+
+\begin{itemize}
+
+       \item Flujograma del sistema
+       
+         A continuación se describe el algoritmo de comportamiento del sistema de control de acceso. El diagrama representa el flujo lógico completo desde el inicio hasta la resolución de cada evento de acceso.
+
+             \begin{itemize}
+             
+                \item Descripción del Algoritmo (Pseudocódigo Estructurado):
+
+                En el Algoritmo~\ref{alg:Algoritmo1} se puede observar el pseudocódigo, el cual, comienza declarando un bloque de INICIO que configura los periféricos. A continuación se evalúa si el sistema está bloqueado; en caso afirmativo, se verifica el temporizador y se libera al cumplirse 30 segundos. Si el sistema no está bloqueado, se espera la entrada del usuario. Cuando la contraseña está completa, se ejecuta la comparación: si es correcta, se activa el servo y el LED verde; si es incorrecta, se incrementa el contador de fallos y se evalúa si se alcanzó el límite. El proceso retorna al inicio del bucle en todos los casos.
+
+                  
+             \end{itemize}
+             
+\end{itemize}
+
+\input{Codes/Code_1_R1} 
+%\bigskip
+
+
+\begin{itemize}
+
+    \item Justificación técnica del microcontrolador seleccionado
+
+        \begin{itemize}
+
+             \item Microcontrolador Seleccionado: Arduino UNO (ATmega328P): El Arduino UNO con microcontrolador ATmega328P resulta adecuado para este sistema debido a su disponibilidad, bajo costo, amplia comunidad de soporte y suficiente cantidad de pines para los periféricos requeridos\cite{Arduino_datasheet}.
+
+             \item Análisis de Pines Requeridos:
+              El ATmega328P dispone de 14 pines digitales (6 con PWM) y 6 analógicos, cubriendo ampliamente los 12 pines requeridos con margen de expansión.
+              
+                 \input{tables/Table_2_R1}
+
+             \item Capacidad de Procesamiento
+
+                 \begin{itemize}
+                 
+                       \item CPU: ATmega328P @ 16 MHz
+                       \item Memoria Flash: 32 KB (programa ocupa < 5 KB)
+                       \item SRAM: 2 KB (suficiente para buffers de contraseña y variables de estado)
+                       \item EEPROM: 1 KB (almacenamiento persistente de contraseña) 
+                       
+                 \end{itemize}
+
+             \item Consumo Energético
+
+                  \begin{itemize}
+                 
+                       \item Consumo activo: ~46 mA @ 5V = ~230 mW
+                       \item LED: ~20 mA c/u con resistencia limitadora de 220 ohms
+                       \item Servo SG90: ~100–250 mA en movimiento
+                       \item Alimentación recomendada: 5V/1A (USB o adaptador)
+                       
+                 \end{itemize}
+                 
+             \item Componentes Auxiliares
+                  \input{tables/Table_3_R1}
+
+             \item Esquema de Conexión
+
+             En la Figura \ref{fig:Imagen_1_R1} se observa el diagrama de conexión correspondiente al funcionamiento de este circuito, desarrollado a través del programa de circuitado. A continuación se mencionan las conexiones establecidas en el proyecto:
+             \begin{itemize}
+                 \item Teclado 4x4: Filas a pines D4, D5, D6, D7 — Columnas a pines D8, D9, D10, D11
+                \item LED verde: Pin D12 → Resistencia 220 ohms → Ánodo LED → Cátodo → GND
+                \item LED rojo: Pin D13 → Resistencia 220 ohms → Ánodo LED → Cátodo → GND
+                \item Servo SG90: Cable señal a Pin D3 (PWM), VCC a 5V, GND a GND
+                \item Buzzer: Pin D2 → Buzzer (+) → GND
+                \item Alimentación: 5V desde USB o regulador 7805
+
+             \end{itemize}
+             \textit{EasyEDA}.
+                  \begin{figure}[h]
+                  \centering
+                  \includegraphics[width=\columnwidth]{images/Imagen_1R1.png}
+                  \caption{Esquemático de Conexión Reto 1}
+                  \label{fig:Imagen_1_R1}
+                  \end{figure}
+             
+        \end{itemize}
+  
+\end{itemize}
+
+\begin{itemize}
+      \item Código documentado
+      
+      El código está organizado de forma modular separando la inicialización de hardware, la lógica de verificación, el control de la cerradura y la gestión de estados de bloqueo. Se evita el uso de delay() para garantizar temporización no bloqueante.
+
+      \input{Codes/Code_2_R1}
+      
+\end{itemize}
+

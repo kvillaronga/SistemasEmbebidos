@@ -1,0 +1,61 @@
+\begin{itemize}
+    \item ¿Por qué no basta con "tener Wi-Fi"?
+    Una solución IoT completa involucra múltiples capas de comunicación. Algunas se encargan de conectar sensores al microcontrolador, otras permiten enlazar el nodo con internet, y otras definen cómo se intercambian los datos a nivel de aplicación. Reducir el IoT únicamente a la conectividad Wi-Fi constituye un error conceptual frecuente, ya que ignora la complejidad real de los sistemas embebidos conectados.
+
+    \begin{itemize}
+        \item Comunicación interna del nodo embebido (dentro del hardware)
+        Antes de transmitir información a la red, el sistema debe capturar y procesar correctamente los datos provenientes de los sensores:
+
+        \begin{itemize}
+            \item GPIO y señales digitales: lectura de estados y activación de actuadores.
+            \item Entradas analógicas y ADC: adquisición de variables continuas como temperatura o presión.
+            \item PWM: control de velocidad, intensidad luminosa o posición.
+            \item I2C: comunicación con múltiples sensores usando pocos conductores.
+            \item SPI: transmisión de alta velocidad con memorias, pantallas o sensores especializados.
+            \item UART: comunicación serial para depuración o conexión con módulos externos.
+        \end{itemize}
+
+        \item Tecnologías inalámbricas para conectar el nodo a la red
+
+        La selección de la tecnología de comunicación depende del equilibrio entre alcance, consumo energético, velocidad de transmisión y costo de implementación. En la Tabla~\ref{tab:Tabla_4_PDCIoT} se resumen las tecnologías más utilizadas.
+
+        \input{tables/Table_4_PDCIoT}
+
+        No existe una tecnología universalmente superior; la elección depende del caso de uso específico.
+
+        \item Notas específicas de cada tecnología
+
+        \begin{itemize}
+            \item Wi-Fi: basado en el estándar 802.11, ideal para transmisión de grandes volúmenes de datos y conexión directa a internet.
+            \item Bluetooth / BLE: optimizado para bajo consumo, fundamental en dispositivos portátiles y sensores de batería.
+            \item ZigBee: diseñado para redes de sensores distribuidos que operan de forma cooperativa.
+            \item Thread: protocolo mallado basado en IPv6, auto-reparable y eficiente energéticamente.
+            \item LoRaWAN: orientado a telemetría de largo alcance con bajo consumo y baja frecuencia de transmisión.
+            \item Celular / NB-IoT: permite independencia de redes locales, aunque con mayor complejidad operativa.
+        \end{itemize}
+
+        \item Protocolos de aplicación: cómo se empaqueta y transporta la información
+
+        Una vez establecida la conexión de red, es necesario definir el protocolo de intercambio de datos:
+
+        \begin{itemize}
+            \item HTTP / REST: modelo cliente-servidor basado en solicitudes y respuestas. Adecuado para servicios web y pruebas iniciales.
+            \item MQTT: protocolo ligero basado en publicador/suscriptor, altamente eficiente para telemetría y sistemas distribuidos. El broker gestiona la distribución de mensajes.
+            \item WebSocket: permite comunicación bidireccional continua mediante conexión persistente, útil para dashboards y control en tiempo real.
+        \end{itemize}
+
+        En aplicaciones con ESP32, MQTT resulta especialmente formativo para comprender la lógica IoT, mientras que HTTP facilita la integración con servicios web.
+
+        \item Criterio de selección resumido
+
+        No existe una solución única óptima. La elección adecuada surge del análisis de los requerimientos del sistema:
+
+        \begin{itemize}
+            \item ¿Qué alcance de comunicación se necesita?
+            \item ¿Qué volumen de datos se transmitirá y con qué frecuencia?
+            \item ¿Cuál es el consumo energético permitido?
+            \item ¿Cuál es el costo y la facilidad de implementación en el entorno específico?
+        \end{itemize}
+
+    \end{itemize}
+\end{itemize}

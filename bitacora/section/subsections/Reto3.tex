@@ -1,0 +1,122 @@
+\begin{itemize}
+    \item Análisis del problema
+        \begin{itemize}
+        
+            \item Descripción general:
+            El sistema de riego automático para cultivo de tomate monitorea continuamente la humedad relativa del ambiente mediante un sensor digital DHT11. Cuando la humedad desciende por debajo de un umbral mínimo, activa una bomba de agua (mediante relé) para iniciar el riego. El proceso se detiene al alcanzar el nivel de humedad óptimo. Se implementa histéresis para evitar ciclos de encendido/apagado rápidos y temporización no bloqueante para garantizar un funcionamiento secuencial estable. La información del sistema se visualiza en una pantalla OLED I2C de 0.96".
+
+        \end{itemize} 
+
+        \item Identificación de Entradas y Salidas
+        \begin{itemize}
+            
+            \item Entradas:
+                \begin{itemize}
+                    \item  Sensor DHT11: señal digital en pin D2 (humedad relativa y temperatura).
+
+                    \item Botón de riego manual (override): pin digital D3.                  
+                \end{itemize}
+            
+            \item Salidas:
+                \begin{itemize}
+                    \item Módulo relé 5V: activa/desactiva la bomba de agua.
+                    \item LED verde: humedad adecuada (IDLE).    
+                    \item LED azul/amarillo: riego activo (REGANDO).
+                    \item LED rojo: humedad crítica baja (ALARMA).
+                    \item Pantalla OLED I2C 0.96" 128x64: visualización del porcentaje de humedad y estado del sistema.
+                \end{itemize}
+        \end{itemize}
+
+        \item Restricciones técnicas
+            \begin{itemize}
+                \item No se debe usar delay() en el ciclo principal.
+                \item Implementación de histéresis en umbrales de humedad.
+                \item El sistema debe operar de forma completamente autónoma sin intervención humana.
+                \item Separación de la lógica de negocio del control de hardware.
+                \item El DHT11 requiere un intervalo mínimo de 2000 ms entre lecturas.
+                \item Tiempo mínimo de riego: 5 segundos para evitar micro-ciclos.
+                
+            \end{itemize}
+
+        \item Definición de umbrales y variables:
+
+        En la Tabla~\ref{tab:Table_1_R3}, se observa la definición de las variables con sus respectivas descripciones y justificación. Reconocer las variables a utilizar sera de ayuda a la hora de realizar el código.
+
+        \input{tables/Table_1_R3}
+
+        \item Flujograma del Sistema
+
+        El sistema opera mediante un ciclo continuo con lecturas periódicas del sensor DHT11 cada 2000 ms. La lógica de control de la bomba se ejecuta basándose en el estado actual y los valores de humedad medidos, aplicando histéresis para garantizar estabilidad.
+
+        \input{Codes/Code1_R3}
+
+        \item Justificación técnica del microcontrolador
+            \begin{itemize}
+                \item Microcontrolador Seleccionado: Arduino UNO (ATmega328P)
+    
+                Para el sistema de riego autónomo se selecciona el Arduino UNO. El ATmega328P es suficiente para este prototipo educativo dado que el DHT11 utiliza un único pin digital y la pantalla OLED SSD1306 se comunica por I2C, ocupando únicamente los pines A4 y A5. Para aplicaciones de campo se recomendaría el Arduino Nano o ESP32 por su menor consumo energético y posibilidad de conectividad inalámbrica.
+    
+                \item Análisis de Pines Requeridos:
+    
+                En la Tabla~\ref{tab:Tabla_2_R3}, se observan los pines solicitados para el correcto funcionamiento del programa.
+    
+                \input{tables/Table_2_R3}
+
+                \item Capacidad de Procesamiento y Consumo
+                \begin{itemize}
+                    \item CPU: ATmega328P @ 16 MHz — suficiente para lectura digital y control.
+
+                    \item Consumo sistema: ~85 mA (sin bomba); el DHT11 consume ~1 mA y la OLED ~20 mA en operación.
+
+                    \item Relé 5V: bobina ~70 mA; la bomba se alimenta de fuente externa.
+
+                    \item Se recomienda fuente de 12V/2A para alimentar tanto el Arduino como la bomba.
+
+                    \item El relé desacopla galvánicamente el microcontrolador de la carga.
+                \end{itemize}
+    
+                \item Componentes auxiliares
+    
+                En la tabla \ref{tab:Tabla_3_R3}, se observan los componentes relevantes al proyecto a desarrollar.
+
+                \input{tables/Table_3_R3}
+    
+                \item Esquema de conexión 
+                En la Figura \ref{fig:Imagen_1R3} se observa el diagrama de conexión correspondiente al funcionamiento de este circuito, desarrollado a través del programa de circuitado. A continuación, se mencionan los pines conectados.
+                \begin{itemize}
+                    
+                    \item DHT11: pin DATA a D2, VCC a 5V, GND a GND 
+                
+                    \item Relé: IN a pin D4, VCC a 5V, GND a GND; bornes COM/NO a bomba y fuente externa
+
+                    \item LED verde: D5 → 220 ohms → LED → GND
+
+                    \item LED azul: D6 → 220 ohms → LED → GND
+
+                    \item LED rojo: D7 → 220 ohms → LED → GND
+
+                    \item Buzzer activo: D8 → buzzer (+) → GND
+
+                    \item Botón manual: D3 con resistencia pull-up interna → GND al presionar
+
+                    \item OLED SSD1306: SDA a A4, SCL a A5, VCC a 3.3V o 5V, GND a GND 
+
+                \end{itemize}
+
+   
+               \textit{EasyEDA}.
+                  \begin{figure}[h]
+                  \centering
+                  \includegraphics[width=\columnwidth]{images/Imagen_1R3.png}
+                  \caption{Esquemático de Conexión Reto 3}
+                  \label{fig:Imagen_1R3}
+                  \end{figure}
+                
+            \end{itemize}
+    
+    \item Código Documentado
+
+    El código propuesto documentado se encuentra registrado a continuación:
+    \input{Codes/Code2_R3}
+\end{itemize}
+        

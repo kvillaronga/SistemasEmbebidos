@@ -1,0 +1,39 @@
+
+
+\begin{algorithm}[t]
+\caption{Control de Temperatura con Histéresis}
+\label{alg:control_temp}
+\begin{algorithmic}[1]
+
+\Statex \textbf{INICIO}
+\State Inicializar pines, LCD, sensor
+\State $\text{estadoActual} \gets \text{NORMAL}$
+
+\Loop \ \textbf{PRINCIPAL} (cada 500 ms)
+    \State $\text{temperaturaActual} \gets \text{leerSensor}()$
+    
+    \If{$\text{estadoActual} = \text{NORMAL}$}
+        \If{$\text{temperaturaActual} \geq \text{UMBRAL\_ADVERTENCIA}$}
+            \State $\text{estadoActual} \gets \text{ADVERTENCIA}$
+        \EndIf
+
+    \ElsIf{$\text{estadoActual} = \text{ADVERTENCIA}$}
+        \If{$\text{temperaturaActual} \geq \text{UMBRAL\_CRITICO}$}
+            \State $\text{estadoActual} \gets \text{CRITICO}$
+        \ElsIf{$\text{temperaturaActual} < (\text{UMBRAL\_ADVERTENCIA} - \text{HISTERESIS})$}
+            \State $\text{estadoActual} \gets \text{NORMAL}$
+        \EndIf
+
+    \ElsIf{$\text{estadoActual} = \text{CRITICO}$}
+        \If{$\text{temperaturaActual} < (\text{UMBRAL\_CRITICO} - \text{HISTERESIS})$}
+            \State $\text{estadoActual} \gets \text{ADVERTENCIA}$
+        \EndIf
+    \EndIf
+
+    \State actualizarIndicadores($\text{estadoActual}$)
+    \State mostrarEnLCD($\text{temperaturaActual, estadoActual}$)
+\EndLoop
+\Statex \textbf{FIN}
+
+\end{algorithmic}
+\end{algorithm}

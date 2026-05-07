@@ -1,0 +1,108 @@
+% !TEX root = main.tex
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts % Permite usar \thanks en el bloque de autores
+
+% Carga el preámbulo con paquetes y configuraciones comunes
+\input{preamble.tex}
+
+% Definición del comando BibTeX para la bibliografía (estándar de IEEE)
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+  T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+  
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+% ===================================================================
+% INICIO DEL DOCUMENTO
+% ===================================================================
+\begin{document}
+  % Configuración de los colores para los hipervínculos del PDF
+  % Para revisiones a doble ciego, se recomienda usar 'black' en todos los campos.
+  \hypersetup{citecolor=black, linkcolor=black!80, urlcolor=gray, breaklinks=true}
+
+  % ===================================================================
+  % TÍTULO Y AUTORES
+  % ===================================================================
+  % Edita el título del artículo aquí.
+  \title{Plantilla de artículo IEEE en LaTeX: guía práctica para estudiantes\\\vspace{2pt}}
+
+  % Edita la información de los autores.
+  % Duplica el bloque \IEEEauthorblock para añadir más autores y afiliaciones.
+  % En envíos anónimos (doble ciego), elimina esta sección o anonimiza los datos.
+  \author{%
+  \IEEEauthorblockN{Karen C. Villaronga F.}
+  \IEEEauthorblockA{\textit{Facultad de Ingeniería Mecatrónica}\\
+    \textit{Universidad Santo Tomás}\\
+    Bucaramanga, Colombia\\
+    karencecilia.villaronga@ustabuca.edu.co}
+  \and
+  \IEEEauthorblockN{Joseph S. Suarez B.}
+  \IEEEauthorblockA{\textit{Facultad de Ingeniería Mecatrónica}\\
+    \textit{Universidad Santo Tomás}\\
+    Bucaramanga, Colombia\\
+    josephsantiago.suarez@ustabuca.edu.co}
+  }
+
+  % Descomenta la siguiente línea para añadir notas de financiación o agradecimientos en el pie de página del título.
+  % \thanks{Este trabajo fue financiado por la Institución XYZ bajo el proyecto ABC.}
+
+\maketitle
+
+% Ajuste de estilo para mantener la tipografía original de IEEE.
+\renewcommand\sffamily{}
+
+% ===================================================================
+% RESUMEN Y PALABRAS CLAVE
+% ===================================================================
+% El contenido del resumen y las palabras clave se encuentra en 'abstract.tex'.
+\input{section/abstract}
+
+% ===================================================================
+% CUERPO DEL ARTÍCULO
+% ===================================================================
+% Se recomienda organizar cada sección en un archivo .tex separado para mayor claridad.
+% Usa \label{sec:nombre} para crear etiquetas y \ref{sec:nombre} para referenciarlas.
+
+\section{Introducción}\label{sec:introduccion}
+  \input{section/introduction}
+
+% Descomenta la siguiente sección para incluir una revisión del estado del arte.
+% Asegúrate de crear y editar el archivo 'literature.tex'.
+ %\section{Revisión de literatura}\label{sec:literatura}
+  \input{section/literature}
+
+\section{Marco Referencial}\label{sec:marcoteorico} 
+    \input{section/MarcoTeo}
+
+\section{Desarrollo de talleres}\label{sec:talleres}
+  \input{section/Talleres}
+
+\section{Protocolos de Comunicación}\label{sec:protocolosdecomunicacion}
+  \input{section/protocolosDeCom}
+
+\section{IoT VS Internet Convencional}\label{sec:iotvsinternet}
+  \input{section/iotVSint}
+
+\section{Resultados y discusión}\label{sec:resultados}
+  \input{section/results}
+
+\section{Conclusiones}\label{sec:conclusiones}
+  \input{section/conclusions}
+
+% La sección de agradecimientos es opcional y no está numerada.
+\section*{Agradecimientos}\label{sec:agradecimientos}
+  \input{section/acknoledgment}
+
+% ===================================================================
+% BIBLIOGRAFÍA
+% ===================================================================
+% Define el estilo de la bibliografía (IEEEtran es el estándar).
+% Añade tus referencias en el archivo 'reference.bib'.
+\bibliographystyle{IEEEtran}
+
+
+\footnotesize\bibliography{reference}
+
+\end{document}
