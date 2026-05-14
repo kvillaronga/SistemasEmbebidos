@@ -49,8 +49,8 @@
 Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // ─── CONFIGURACIÓN Wi-Fi y ThingSpeak ─────────────────────
-const char* WIFI_SSID    = "APTO_303_PLUS";
-const char* WIFI_PASS    = "12352399031";
+const char* WIFI_SSID    = "iPhone de Shadows";
+const char* WIFI_PASS    = "123456789";
 
 const char* MQTT_BROKER  = "mqtt3.thingspeak.com";
 const int   MQTT_PORT    = 1883;
@@ -81,7 +81,7 @@ const int SERVO_CERRADO = 90;
 // ─── INTERVALOS ───────────────────────────────────────────
 const unsigned long INTERVALO_SENSOR = 5000UL;
 const unsigned long INTERVALO_IOT    = 15000UL;
-const unsigned long INTERVALO_OLED   = 2000UL;  // refresco pantalla
+const unsigned long INTERVALO_OLED   = 2000UL;
 
 // ─── OBJETOS ──────────────────────────────────────────────
 DHT dht(PIN_DHT, DHT11);
@@ -101,7 +101,6 @@ unsigned long tUltimaSensor = 0;
 unsigned long tUltimaIot    = 0;
 unsigned long tUltimaOled   = 0;
 
-// Pantalla: alterna entre dos páginas de info
 int  paginaOled = 0;
 unsigned long tCambioPagina = 0;
 const unsigned long INTERVALO_PAGINA = 4000UL;
@@ -127,25 +126,18 @@ void barraProgreso(int x, int y, int ancho, int alto, int porcentaje);
 // ════════════════════════════════════════════════════════════
 void setup() {
   Serial.begin(115200);
-  Serial.println("\n=== Sistema de Riego Automático ===");
+  Serial.println("\n=== Sistema de Riego Automatico ===");
 
-  // Relé apagado al inicio
   pinMode(PIN_RELE, OUTPUT);
   digitalWrite(PIN_RELE, HIGH);
 
-  // Servo en posición abierta
   servoTecho.attach(PIN_SERVO, 500, 2400);
   servoTecho.write(SERVO_ABIERTO);
   techoCerrado = false;
   delay(500);
 
-  // DHT11
   dht.begin();
-
-  // OLED
   iniciarOled();
-
-  // Wi-Fi y MQTT
   conectarWifi();
   mqttClient.setServer(MQTT_BROKER, MQTT_PORT);
 }
@@ -157,24 +149,24 @@ void loop() {
 
   unsigned long ahora = millis();
 
-  // ── Sensores y control ────────────────────────────────
   if (ahora - tUltimaSensor >= INTERVALO_SENSOR) {
     tUltimaSensor = ahora;
     leerSensores();
     controlarTecho();
     controlarRiego();
 
-    Serial.printf("[Sensores] Temp: %.1f°C | H.aire: %.0f%% | ADC: %d | H.suelo: %.0f%%\n",
-                  temperatura, humedadAire, adcSustrato, humedadSustrato);
-    Serial.printf("[Control]  Bomba: %s | Techo: %s\n",
-                  bombaActiva ? "ON" : "OFF",
-                  techoCerrado ? "CERRADO" : "ABIERTO");
+    Serial.print("[Sensores] Temp: ");     Serial.print(temperatura, 1);
+    Serial.print("C | H.aire: ");          Serial.print(humedadAire, 0);
+    Serial.print("% | ADC: ");             Serial.print(adcSustrato);
+    Serial.print(" | H.suelo: ");          Serial.print(humedadSustrato, 0);
+    Serial.println("%");
+
+    Serial.print("[Control]  Bomba: ");    Serial.print(bombaActiva ? "ON" : "OFF");
+    Serial.print(" | Techo: ");            Serial.println(techoCerrado ? "CERRADO" : "ABIERTO");
   }
 
-  // ── Pantalla OLED ─────────────────────────────────────
   if (ahora - tUltimaOled >= INTERVALO_OLED) {
     tUltimaOled = ahora;
-    // Cambiar página cada INTERVALO_PAGINA ms
     if (ahora - tCambioPagina >= INTERVALO_PAGINA) {
       tCambioPagina = ahora;
       paginaOled = (paginaOled + 1) % 2;
@@ -182,7 +174,6 @@ void loop() {
     mostrarPantalla();
   }
 
-  // ── IoT ───────────────────────────────────────────────
   if (ahora - tUltimaIot >= INTERVALO_IOT) {
     tUltimaIot = ahora;
     publicarThingSpeak();
@@ -195,13 +186,12 @@ void loop() {
 
 void iniciarOled() {
   if (!oled.begin(SSD1306_SWITCHCAPVCC, OLED_ADDRESS)) {
-    Serial.println("[OLED] Error al iniciar – continúa sin pantalla");
+    Serial.println("[OLED] Error al iniciar - continua sin pantalla");
     return;
   }
   oled.clearDisplay();
   oled.setTextColor(SSD1306_WHITE);
 
-  // Pantalla de bienvenida
   oled.setTextSize(1);
   oled.setCursor(20, 10);
   oled.println("Sistema de Riego");
@@ -225,54 +215,45 @@ void mostrarPantalla() {
   oled.display();
 }
 
-// ── Página 1: temperaturas y humedades con barras ─────────
 void paginaPrincipal() {
-  // Cabecera
   oled.setTextSize(1);
   oled.setCursor(0, 0);
   oled.print("Temp:");
-  oled.setTextSize(1);
   oled.setCursor(36, 0);
-  oled.printf("%.1f C", temperatura);
-
+  oled.print(temperatura, 1);
+  oled.print(" C");
   oled.setCursor(80, 0);
   oled.print("1/2");
 
-  // Línea divisoria
   oled.drawLine(0, 10, 128, 10, SSD1306_WHITE);
 
-  // Humedad del aire
-  oled.setTextSize(1);
   oled.setCursor(0, 14);
   oled.print("Aire:");
   oled.setCursor(36, 14);
-  oled.printf("%.0f%%", humedadAire);
+  oled.print((int)humedadAire);
+  oled.print("%");
   barraProgreso(0, 24, 128, 7, (int)humedadAire);
 
-  // Humedad sustrato
   oled.setCursor(0, 35);
   oled.print("Suelo:");
   oled.setCursor(40, 35);
-  oled.printf("%.0f%%", humedadSustrato);
+  oled.print((int)humedadSustrato);
+  oled.print("%");
   barraProgreso(0, 45, 128, 7, (int)humedadSustrato);
 
-  // Indicador de página (puntos abajo)
   oled.fillCircle(60, 60, 2, SSD1306_WHITE);
   oled.drawCircle(68, 60, 2, SSD1306_WHITE);
 }
 
-// ── Página 2: estado de actuadores y Wi-Fi ────────────────
 void paginaEstado() {
   oled.setTextSize(1);
 
-  // Cabecera
   oled.setCursor(0, 0);
   oled.print("Estado sistema");
   oled.setCursor(104, 0);
   oled.print("2/2");
   oled.drawLine(0, 10, 128, 10, SSD1306_WHITE);
 
-  // Bomba
   oled.setCursor(0, 15);
   oled.print("Bomba:");
   if (bombaActiva) {
@@ -287,19 +268,16 @@ void paginaEstado() {
     oled.print("OFF");
   }
 
-  // Techo
   oled.setCursor(0, 30);
   oled.print("Techo:");
   oled.setCursor(48, 30);
   oled.print(techoCerrado ? "CERRADO" : "ABIERTO");
 
-  // Wi-Fi
   oled.setCursor(0, 45);
   oled.print("WiFi:");
   oled.setCursor(36, 45);
   if (WiFi.status() == WL_CONNECTED) {
     oled.print("OK");
-    // Icono de señal simple
     oled.drawLine(56, 50, 56, 46, SSD1306_WHITE);
     oled.drawLine(59, 50, 59, 44, SSD1306_WHITE);
     oled.drawLine(62, 50, 62, 42, SSD1306_WHITE);
@@ -307,17 +285,17 @@ void paginaEstado() {
     oled.print("Sin conexion");
   }
 
-  // Temperatura umbral techo
   oled.setCursor(0, 57);
-  oled.printf("Umbral: %.0fC cerrar/%.0fC abrir",
-              TEMP_CIERRA_TECHO, TEMP_ABRE_TECHO);
+  oled.print("Umbral: ");
+  oled.print((int)TEMP_CIERRA_TECHO);
+  oled.print("C/");
+  oled.print((int)TEMP_ABRE_TECHO);
+  oled.print("C");
 
-  // Puntos de página
   oled.drawCircle(60, 60, 2, SSD1306_WHITE);
   oled.fillCircle(68, 60, 2, SSD1306_WHITE);
 }
 
-// ── Barra de progreso horizontal ──────────────────────────
 void barraProgreso(int x, int y, int ancho, int alto, int porcentaje) {
   porcentaje = constrain(porcentaje, 0, 100);
   oled.drawRect(x, y, ancho, alto, SSD1306_WHITE);
@@ -354,11 +332,11 @@ void controlarTecho() {
   if (!techoCerrado && temperatura >= TEMP_CIERRA_TECHO) {
     servoTecho.write(SERVO_CERRADO);
     techoCerrado = true;
-    Serial.println("[Techo] CERRADO – temperatura alta");
+    Serial.println("[Techo] CERRADO - temperatura alta");
   } else if (techoCerrado && temperatura <= TEMP_ABRE_TECHO) {
     servoTecho.write(SERVO_ABIERTO);
     techoCerrado = false;
-    Serial.println("[Techo] ABIERTO – temperatura normal");
+    Serial.println("[Techo] ABIERTO - temperatura normal");
   }
 }
 
@@ -397,7 +375,6 @@ void desactivarBomba() {
 // ════════════════════════════════════════════════════════════
 
 void conectarWifi() {
-  // Mostrar en OLED mientras conecta
   oled.clearDisplay();
   oled.setTextSize(1);
   oled.setCursor(0, 10);
@@ -406,7 +383,9 @@ void conectarWifi() {
   oled.print(WIFI_SSID);
   oled.display();
 
-  Serial.printf("Conectando a Wi-Fi: %s ", WIFI_SSID);
+  Serial.print("Conectando a Wi-Fi: ");
+  Serial.print(WIFI_SSID);
+  Serial.print(" ");
   WiFi.begin(WIFI_SSID, WIFI_PASS);
   int intentos = 0;
   while (WiFi.status() != WL_CONNECTED && intentos < 30) {
@@ -418,10 +397,11 @@ void conectarWifi() {
   oled.clearDisplay();
   oled.setCursor(0, 10);
   if (WiFi.status() == WL_CONNECTED) {
-    Serial.printf("\nWi-Fi conectado. IP: %s\n", WiFi.localIP().toString().c_str());
+    Serial.print("\nWi-Fi conectado. IP: ");
+    Serial.println(WiFi.localIP());
     oled.print("WiFi conectado!");
     oled.setCursor(0, 24);
-    oled.print(WiFi.localIP().toString());
+    oled.print(WiFi.localIP());
   } else {
     Serial.println("\n[ERROR] Sin Wi-Fi.");
     oled.print("Sin WiFi.");
@@ -436,10 +416,12 @@ void conectarMqtt() {
   int intentos = 0;
   while (!mqttClient.connected() && intentos < 5) {
     Serial.print("Conectando MQTT...");
-    if (mqttClient.connect(MQTT_CLIENT, MQTT_USER, MQTT_PASS))
+    if (mqttClient.connect(MQTT_CLIENT, MQTT_USER, MQTT_PASS)) {
       Serial.println(" OK");
-    else {
-      Serial.printf(" Fallo (estado: %d). Reintento en 3s\n", mqttClient.state());
+    } else {
+      Serial.print(" Fallo (estado: ");
+      Serial.print(mqttClient.state());
+      Serial.println("). Reintento en 3s");
       delay(3000);
       intentos++;
     }
@@ -448,7 +430,7 @@ void conectarMqtt() {
 
 void publicarThingSpeak() {
   if (WiFi.status() != WL_CONNECTED) {
-    Serial.println("[IoT] Sin Wi-Fi – publicación omitida");
+    Serial.println("[IoT] Sin Wi-Fi - publicacion omitida");
     return;
   }
   if (!mqttClient.connected()) conectarMqtt();
@@ -459,8 +441,10 @@ void publicarThingSpeak() {
            temperatura, humedadAire, humedadSustrato,
            bombaActiva ? 1 : 0, techoCerrado ? 1 : 0);
 
-  if (mqttClient.publish(MQTT_CHANNEL, payload))
-    Serial.printf("[IoT] Publicado: %s\n", payload);
-  else
+  if (mqttClient.publish(MQTT_CHANNEL, payload)) {
+    Serial.print("[IoT] Publicado: ");
+    Serial.println(payload);
+  } else {
     Serial.println("[IoT] Error al publicar");
+  }
 }
