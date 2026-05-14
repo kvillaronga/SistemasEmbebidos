@@ -14,7 +14,7 @@ y publica datos en ThingSpeak vía MQTT.
 ---
 
 ## Diagrama del sistema
-![Diagrama](diagrama.png)
+![Esquematico](../../capturas/esquematico.jpeg)
 
 ---
 
@@ -22,7 +22,7 @@ y publica datos en ThingSpeak vía MQTT.
 - ESP32-WROOM
 - Sensor DHT11
 - Sensor YL-100 (humedad sustrato)
-- Servo SG90
+- Servo MG995
 - Relé 1 canal
 - OLED SSD1306 0.96" I2C
 - Bomba sumergible 5V
@@ -47,7 +47,7 @@ y publica datos en ThingSpeak vía MQTT.
 | Adafruit Unified Sensor | ^1.1.9 | Dependencia de DHT |
 | Adafruit SSD1306 | ^2.5.7 | Control pantalla OLED |
 | Adafruit GFX Library | ^1.11.9 | Gráficos para OLED |
-| ESP32Servo | ^0.13.0 | Control servo SG90 |
+| ESP32Servo | ^0.13.0 | Control servo MG995 |
 | PubSubClient (knolleary) | ^2.8 | Comunicación MQTT con ThingSpeak |
 
 ---
@@ -79,12 +79,16 @@ y publica datos en ThingSpeak vía MQTT.
    - Se conecta al broker MQTT de ThingSpeak
    - Lee sensores cada 5 segundos
    - Publica en ThingSpeak cada 15 segundos
-3. Verificar datos en: `https://thingspeak.mathworks.com/channels/3382521`
+3. Verificar datos en: `https://thingspeak.com/channels/TU_CHANNEL_ID`
 
 ---
 
 ## Capturas de funcionamiento
-*(agregar fotos/capturas aquí)*
+![Repo creado](../../capturas/repositorio-creado.png)
+![Proyecto creado](../../capturas/proyecto-creado.png)
+![Git version](../../capturas/git-version.png)
+![Primer commit](../../capturas/primer-commit.png)
+![Prueba commits](../../capturas/prueba-commits.png)
 
 ---
 
