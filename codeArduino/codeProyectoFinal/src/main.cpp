@@ -65,9 +65,12 @@ const char* MQTT_CHANNEL = "channels/3382521/publish";
 #define PIN_RELE  26
 #define PIN_SERVO 25
 
-// ─── UMBRALES ─────────────────────────────────────────────
-const float TEMP_CIERRA_TECHO = 28.0;
-const float TEMP_ABRE_TECHO   = 25.0;
+// ─── UMBRALES PEREJIL ─────────────────────────────────────
+const float TEMP_CIERRA_TECHO = 25.0;   // °C – protege cultivo
+const float TEMP_ABRE_TECHO   = 22.0;   // °C – histéresis 3°C
+
+const int HUMEDAD_MIN_RIEGO  = 60;      // % – activa bomba
+const int HUMEDAD_MAX_RIEGO  = 80;      // % – apaga bomba
 
 const int ADC_SUELO_SECO   = 2800;
 const int ADC_SUELO_HUMEDO = 1500;
@@ -82,6 +85,7 @@ const int SERVO_CERRADO = 90;
 const unsigned long INTERVALO_SENSOR = 5000UL;
 const unsigned long INTERVALO_IOT    = 15000UL;
 const unsigned long INTERVALO_OLED   = 2000UL;
+const unsigned long INTERVALO_PAGINA = 4000UL;
 
 // ─── OBJETOS ──────────────────────────────────────────────
 DHT dht(PIN_DHT, DHT11);
@@ -100,12 +104,10 @@ bool  techoCerrado    = false;
 unsigned long tUltimaSensor = 0;
 unsigned long tUltimaIot    = 0;
 unsigned long tUltimaOled   = 0;
-
-int  paginaOled = 0;
 unsigned long tCambioPagina = 0;
-const unsigned long INTERVALO_PAGINA = 4000UL;
+unsigned long tInicioBomba  = 0;
 
-unsigned long tInicioBomba = 0;
+int paginaOled = 0;
 
 // ─── PROTOTIPOS ───────────────────────────────────────────
 void conectarWifi();
@@ -126,7 +128,7 @@ void barraProgreso(int x, int y, int ancho, int alto, int porcentaje);
 // ════════════════════════════════════════════════════════════
 void setup() {
   Serial.begin(115200);
-  Serial.println("\n=== Sistema de Riego Automatico ===");
+  Serial.println("\n=== Sistema de Riego Automatico – Perejil ===");
 
   pinMode(PIN_RELE, OUTPUT);
   digitalWrite(PIN_RELE, HIGH);
@@ -155,14 +157,13 @@ void loop() {
     controlarTecho();
     controlarRiego();
 
-    Serial.print("[Sensores] Temp: ");     Serial.print(temperatura, 1);
-    Serial.print("C | H.aire: ");          Serial.print(humedadAire, 0);
-    Serial.print("% | ADC: ");             Serial.print(adcSustrato);
-    Serial.print(" | H.suelo: ");          Serial.print(humedadSustrato, 0);
+    Serial.print("[Sensores] Temp: ");  Serial.print(temperatura, 1);
+    Serial.print("C | H.aire: ");       Serial.print(humedadAire, 0);
+    Serial.print("% | ADC: ");          Serial.print(adcSustrato);
+    Serial.print(" | H.suelo: ");       Serial.print(humedadSustrato, 0);
     Serial.println("%");
-
-    Serial.print("[Control]  Bomba: ");    Serial.print(bombaActiva ? "ON" : "OFF");
-    Serial.print(" | Techo: ");            Serial.println(techoCerrado ? "CERRADO" : "ABIERTO");
+    Serial.print("[Control]  Bomba: "); Serial.print(bombaActiva ? "ON" : "OFF");
+    Serial.print(" | Techo: ");         Serial.println(techoCerrado ? "CERRADO" : "ABIERTO");
   }
 
   if (ahora - tUltimaOled >= INTERVALO_OLED) {
@@ -191,7 +192,6 @@ void iniciarOled() {
   }
   oled.clearDisplay();
   oled.setTextColor(SSD1306_WHITE);
-
   oled.setTextSize(1);
   oled.setCursor(20, 10);
   oled.println("Sistema de Riego");
@@ -247,7 +247,6 @@ void paginaPrincipal() {
 
 void paginaEstado() {
   oled.setTextSize(1);
-
   oled.setCursor(0, 0);
   oled.print("Estado sistema");
   oled.setCursor(104, 0);
@@ -343,11 +342,11 @@ void controlarTecho() {
 void controlarRiego() {
   unsigned long ahora = millis();
   if (!bombaActiva) {
-    if (humedadSustrato < 40)
+    if (humedadSustrato < HUMEDAD_MIN_RIEGO)
       activarBomba();
   } else {
     bool tiempoOk    = (ahora - tInicioBomba) >= TIEMPO_MIN_BOMBA;
-    bool sueloHumedo = humedadSustrato >= 70;
+    bool sueloHumedo = humedadSustrato >= HUMEDAD_MAX_RIEGO;
     if (tiempoOk && sueloHumedo)
       desactivarBomba();
   }
