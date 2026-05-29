@@ -89,6 +89,8 @@ y publica datos en ThingSpeak vía MQTT.
 ![Git version](../../capturas/git-version.png)
 ![Primer commit](../../capturas/primer-commit.png)
 ![Prueba commits](../../capturas/prueba-commits.png)
+![Thingspeak](../../capturas/thingspeak.png)
+![Circuito montado](../../capturas/circuito.png)
 
 ---
 

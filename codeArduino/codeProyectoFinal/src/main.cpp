@@ -29,6 +29,12 @@
  *    5V      → Servo VCC, Relé VCC
  *    GND     → todos los GND
  *    Bomba alimentada a 6V desde fuente externa
+ *
+ *  LÓGICA SERVO (TECHO):
+ *    ≥ 28 °C          → 90° (techo CERRADO – calor alto)
+ *    15 °C – 25 °C    → 30° (techo ENTREABIERTO – temperatura normal)
+ *    25 °C – 28 °C    → mantiene estado anterior (zona de histéresis)
+ *    < 15 °C          → 30° (techo ENTREABIERTO – frío, sin cambio brusco)
  * ============================================================
  */
 
@@ -65,10 +71,18 @@ const char* MQTT_CHANNEL = "channels/3382521/publish";
 #define PIN_RELE  26
 #define PIN_SERVO 25
 
-// ─── UMBRALES PEREJIL ─────────────────────────────────────
-const float TEMP_CIERRA_TECHO = 25.0;   // °C – protege cultivo
-const float TEMP_ABRE_TECHO   = 22.0;   // °C – histéresis 3°C
+// ─── UMBRALES TEMPERATURA (TECHO) ─────────────────────────
+//  ≥ TEMP_CIERRA → servo a SERVO_CALIENTE (90°) – techo cerrado
+//  ≤ TEMP_ABRE   → servo a SERVO_NORMAL   (30°) – techo entreabierto
+//  Zona media 25–28 °C: histéresis, mantiene estado anterior
+const float TEMP_CIERRA_TECHO = 28.0;   // °C – umbral calor alto
+const float TEMP_ABRE_TECHO   = 25.0;   // °C – umbral temperatura normal
 
+// ─── ÁNGULOS SERVO ────────────────────────────────────────
+const int SERVO_CALIENTE = 90;   // Techo cerrado  (temp ≥ 28 °C)
+const int SERVO_NORMAL   = 30;   // Techo entreabierto (temp ≤ 25 °C)
+
+// ─── UMBRALES RIEGO (PEREJIL) ─────────────────────────────
 const int HUMEDAD_MIN_RIEGO  = 60;      // % – activa bomba
 const int HUMEDAD_MAX_RIEGO  = 80;      // % – apaga bomba
 
@@ -76,10 +90,6 @@ const int ADC_SUELO_SECO   = 2800;
 const int ADC_SUELO_HUMEDO = 1500;
 
 const unsigned long TIEMPO_MIN_BOMBA = 5000UL;
-
-// ─── SERVO ────────────────────────────────────────────────
-const int SERVO_ABIERTO = 0;
-const int SERVO_CERRADO = 90;
 
 // ─── INTERVALOS ───────────────────────────────────────────
 const unsigned long INTERVALO_SENSOR = 5000UL;
@@ -99,7 +109,7 @@ float humedadAire     = 0.0;
 int   adcSustrato     = 0;
 float humedadSustrato = 0.0;
 bool  bombaActiva     = false;
-bool  techoCerrado    = false;
+bool  techoCerrado    = false;   // true = 90°, false = 30°
 
 unsigned long tUltimaSensor = 0;
 unsigned long tUltimaIot    = 0;
@@ -133,8 +143,9 @@ void setup() {
   pinMode(PIN_RELE, OUTPUT);
   digitalWrite(PIN_RELE, HIGH);
 
+  // Posición inicial: techo entreabierto (30°)
   servoTecho.attach(PIN_SERVO, 500, 2400);
-  servoTecho.write(SERVO_ABIERTO);
+  servoTecho.write(SERVO_NORMAL);
   techoCerrado = false;
   delay(500);
 
@@ -163,7 +174,11 @@ void loop() {
     Serial.print(" | H.suelo: ");       Serial.print(humedadSustrato, 0);
     Serial.println("%");
     Serial.print("[Control]  Bomba: "); Serial.print(bombaActiva ? "ON" : "OFF");
-    Serial.print(" | Techo: ");         Serial.println(techoCerrado ? "CERRADO" : "ABIERTO");
+    Serial.print(" | Techo: ");
+    Serial.print(techoCerrado ? "CERRADO (90)" : "ENTREABIERTO (30)");
+    Serial.print(" | Servo: ");
+    Serial.print(techoCerrado ? SERVO_CALIENTE : SERVO_NORMAL);
+    Serial.println(" grados");
   }
 
   if (ahora - tUltimaOled >= INTERVALO_OLED) {
@@ -253,6 +268,7 @@ void paginaEstado() {
   oled.print("2/2");
   oled.drawLine(0, 10, 128, 10, SSD1306_WHITE);
 
+  // ── Bomba ──
   oled.setCursor(0, 15);
   oled.print("Bomba:");
   if (bombaActiva) {
@@ -267,11 +283,19 @@ void paginaEstado() {
     oled.print("OFF");
   }
 
+  // ── Techo: muestra ángulo actual ──
   oled.setCursor(0, 30);
   oled.print("Techo:");
   oled.setCursor(48, 30);
-  oled.print(techoCerrado ? "CERRADO" : "ABIERTO");
+  if (techoCerrado) {
+    oled.print("CER 90");
+  } else {
+    oled.print("ABT 30");
+  }
+  oled.print((char)247);   // símbolo grado °
+  oled.print("g");
 
+  // ── WiFi ──
   oled.setCursor(0, 45);
   oled.print("WiFi:");
   oled.setCursor(36, 45);
@@ -284,11 +308,12 @@ void paginaEstado() {
     oled.print("Sin conexion");
   }
 
+  // ── Umbrales activos ──
   oled.setCursor(0, 57);
-  oled.print("Umbral: ");
-  oled.print((int)TEMP_CIERRA_TECHO);
-  oled.print("C/");
+  oled.print("Umb:");
   oled.print((int)TEMP_ABRE_TECHO);
+  oled.print("C/");
+  oled.print((int)TEMP_CIERRA_TECHO);
   oled.print("C");
 
   oled.drawCircle(60, 60, 2, SSD1306_WHITE);
@@ -327,16 +352,42 @@ int adcAHumedad(int adc) {
   return map(adc, ADC_SUELO_SECO, ADC_SUELO_HUMEDO, 0, 100);
 }
 
+// ────────────────────────────────────────────────────────────
+//  controlarTecho()
+//
+//  Lógica con histéresis de 3 °C:
+//    temp ≥ 28 °C  →  90° (techo cerrado, protege del calor)
+//    temp ≤ 25 °C  →  30° (techo entreabierto, ventilación normal)
+//    25 °C < temp < 28 °C  →  mantiene el estado actual
+//
+//  El rango 15-25 °C queda cubierto por la condición temp ≤ 25 °C.
+//  Por debajo de 15 °C el techo también queda a 30° (sin heladas
+//  extremas en interior; ajusta si tu cultivo lo requiere).
+// ────────────────────────────────────────────────────────────
 void controlarTecho() {
   if (!techoCerrado && temperatura >= TEMP_CIERRA_TECHO) {
-    servoTecho.write(SERVO_CERRADO);
+    // Calor alto → cerrar techo a 90°
+    servoTecho.write(SERVO_CALIENTE);
     techoCerrado = true;
-    Serial.println("[Techo] CERRADO - temperatura alta");
+    Serial.print("[Techo] CERRADO – servo a ");
+    Serial.print(SERVO_CALIENTE);
+    Serial.print("° (temp ");
+    Serial.print(temperatura, 1);
+    Serial.println("°C >= umbral)");
+
   } else if (techoCerrado && temperatura <= TEMP_ABRE_TECHO) {
-    servoTecho.write(SERVO_ABIERTO);
+    // Temperatura normal / fría → abrir techo a 30°
+    servoTecho.write(SERVO_NORMAL);
     techoCerrado = false;
-    Serial.println("[Techo] ABIERTO - temperatura normal");
+    Serial.print("[Techo] ENTREABIERTO – servo a ");
+    Serial.print(SERVO_NORMAL);
+    Serial.print("° (temp ");
+    Serial.print(temperatura, 1);
+    Serial.println("°C <= umbral)");
+
   }
+  // Zona de histéresis (25-28 °C): no se hace nada,
+  // el servo permanece en su posición anterior.
 }
 
 void controlarRiego() {
