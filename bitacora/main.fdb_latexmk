@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1780274949.15909 "main.aux" "main.bbl" "main" 1780274952.21338 0
+["bibtex main"] 1780276564.41972 "main.aux" "main.bbl" "main" 1780276578.20385 0
   "./reference.bib" 1778140892 2957 ff4647ef876497a817fdc9185fafdaf0 ""
   "/usr/local/texlive/2026/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1780274951.61559 22170 d4cd695c53b5a20a8cf7396e9ce8e663 "pdflatex"
+  "main.aux" 1780276577.6453 22170 fe7e40ec50d0faec24859c5259baf11a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1780274949.38864 "/Users/karencita/Documents/PROYECTO-Embebidos/bitacora/main.tex" "main.pdf" "main" 1780274952.21372 0
+["pdflatex"] 1780276575.50157 "/Users/karencita/Documents/PROYECTO-Embebidos/bitacora/main.tex" "main.pdf" "main" 1780276578.20416 0
   "../capturas/proyecto-graficos.png" 1780272987.38798 251970 a1f332476d3f68db3a0400d5588b47ed ""
   "../capturas/proyecto-montado.jpeg" 1780272797.47301 1074224 e9f83a8debd988c63fd292c174504ffe ""
   "/Users/karencita/Documents/PROYECTO-Embebidos/bitacora/main.tex" 1780274748.48192 4263 f0050b966b99e02a4738f529ac56dc29 ""
@@ -174,9 +174,9 @@
   "images/problem_diagram.png" 1778140892 73488 b4cd67533ec6d09d677465545fc344d4 ""
   "images/solution_diagram.png" 1778140892 117219 d4d65f21e6ab0439072743f6a4d088f4 ""
   "images/vista-isometrica.png" 1778170741.62899 2026540 545e5471ea4be3488c15ffdc8fb89b67 ""
-  "main.aux" 1780274951.61559 22170 d4cd695c53b5a20a8cf7396e9ce8e663 "pdflatex"
-  "main.bbl" 1780274949.38153 3466 189ffe3f3a29bc58ae3fa7f6079c3b53 "bibtex main"
-  "main.out" 1780274951.61812 10469 e199546fe68d550645070107b7d73e23 "pdflatex"
+  "main.aux" 1780276577.6453 22170 fe7e40ec50d0faec24859c5259baf11a "pdflatex"
+  "main.bbl" 1780276564.63855 3466 189ffe3f3a29bc58ae3fa7f6079c3b53 "bibtex main"
+  "main.out" 1780276577.64916 10469 e199546fe68d550645070107b7d73e23 "pdflatex"
   "main.tex" 1780274748.48192 4263 f0050b966b99e02a4738f529ac56dc29 ""
   "preamble.tex" 1778171411.20535 3001 e9200a39582e6d7d823e23abc8fdf836 ""
   "section/MarcoTeo.tex" 1778140892 12079 aaee71adfd7d854285474186f01ff8f1 ""
@@ -188,7 +188,7 @@
   "section/iotVSint.tex" 1778140892 8611 f475e31bd83f9db90b7a82c196be0071 ""
   "section/literature.tex" 1778156815.00173 351 2f01ec6ade0498cc4367535af64c48b3 ""
   "section/protocolosDeCom.tex" 1778140892 4085 d33f07b0823bf79d975aaf2d3826d616 ""
-  "section/proyectoFinal.tex" 1780274808.30307 19667 9052bc9a0ff74295345f93d4a22d61c8 ""
+  "section/proyectoFinal.tex" 1780276324.45691 19804 5d063483fc250ee06fd0f4c56a1f8132 ""
   "section/results.tex" 1780274838.74503 3911 cd4c792949c5c5ea01fc9e452827a671 ""
   "section/subsections/Reto1.tex" 1778140892 6382 73bc232d34ab2d224cf079dad1def6d6 ""
   "section/subsections/Reto2.tex" 1778140892 4966 bbb81a493a0fdcadc4061b66c3750bed ""
