@@ -1,16 +1,16 @@
-% Resumen: escribe 150–250 palabras. Evita ecuaciones y citas.
-\begin{abstract}            % Entorno de resumen (obligatorio en IEEE)
-This document is a template in Spanish for writing articles in LaTeX using the IEEE format. It briefly explains the objective of the work, the general methodology, and the main results obtained.
+% Abstract en inglés: 150–250 palabras. Sin ecuaciones ni citas.
+\begin{abstract}
+This technical report documents the design, implementation, and validation of an IoT embedded system for the automated monitoring and control of a parsley (\textit{Petroselinum crispum}) seedling prototype. Developed as the final project for the Embedded Systems course at Universidad Santo Tomás – Seccional Bucaramanga, the system integrates an ESP32-WROOM microcontroller, a DHT11 temperature and relative humidity sensor, a YL-100 soil moisture sensor, a single-channel relay-controlled drip irrigation pump, and an MG995 servo motor driving a mobile roof panel for solar radiation control. Sensor readings are published every 15 seconds to the ThingSpeak IoT platform via the MQTT protocol using the PubSubClient library, enabling real-time remote visualization across five dashboard channels. A non-blocking firmware architecture based on \texttt{millis()} timers manages concurrent tasks including sensor acquisition, hysteresis-based irrigation control, roof actuation, OLED display update, and MQTT publication without any blocking delays. Experimental results confirmed stable Wi-Fi and MQTT connectivity, correct hysteresis behavior for both the pump and the servo, and continuous data streaming to ThingSpeak at the required update rate. The prototype was built on a triangular portable container complying with the physical constraints defined in Client Request Act~1. The report also covers theoretical foundations, structured programming workshops, communication protocols, and a comparative analysis between conventional internet and IoT architectures.
 \end{abstract}
 
-% Palabras clave: 4–6 términos separados por comas
-\begin{IEEEkeywords}         % Palabras clave (Index Terms) separadas por comas
-LaTeX, IEEEtran, templates, figures, tables, bibliography.
+% Palabras clave en inglés: 4–6 términos
+\begin{IEEEkeywords}
+embedded systems, IoT, MQTT, ThingSpeak, ESP32, drip irrigation, precision agriculture.
 \end{IEEEkeywords}
 
-% Resumen en español (sin numeración)
+% Resumen en español
 \section*{Resumen}
-Este documento es una plantilla en español para escribir artículos en LaTeX con el formato IEEE. Aquí se explica brevemente el objetivo del trabajo, la metodología general y el resultado principal.
+Este informe técnico documenta el diseño, implementación y validación de un sistema embebido IoT para el monitoreo y control automático de un semillero portátil de perejil (\textit{Petroselinum crispum}). Desarrollado como proyecto final del curso de Sistemas Embebidos en la Universidad Santo Tomás – Seccional Bucaramanga, el sistema integra un microcontrolador ESP32-WROOM, los sensores DHT11 (temperatura y humedad relativa del aire) y YL-100 (humedad del sustrato), una bomba de riego por goteo controlada mediante relé, y un servo motor MG995 para el accionamiento de un techo móvil de protección solar. Los datos se publican cada 15 segundos en la plataforma ThingSpeak mediante el protocolo MQTT, permitiendo la visualización remota en tiempo real de cinco variables del sistema. El firmware implementa una arquitectura no bloqueante basada en temporizadores \texttt{millis()}, que gestiona concurrentemente la adquisición de sensores, el control con histéresis del riego y del techo, la actualización de una pantalla OLED y la publicación IoT. El informe incluye, además, fundamentos teóricos, talleres de programación estructurada, protocolos de comunicación y un análisis comparativo entre el internet convencional y la arquitectura IoT.
 
 \section*{Palabras clave}
-LaTeX, IEEEtran, plantillas, figuras, tablas, bibliografia.
+Sistemas embebidos, IoT, MQTT, ThingSpeak, ESP32, riego por goteo, agricultura de precisión.

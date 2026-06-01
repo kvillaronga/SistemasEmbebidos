@@ -20,9 +20,9 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{verdugamonar_2025_controladores}
+\bibitem{sergio_2015_interrupciones}
 \BIBentryALTinterwordspacing
-L.~D. Verduga~Monar, ``Controladores con restricciones en el tiempo de respuesta implementados en un sistema embebido stm32 aplicados a las variables flujo y presión de un reactor industrial : diseño e implementación de un controlador con restricciones en el tiempo de respuesta en un sistema embebido stm32 aplicado a la variable presión de un reactor industrial simulado en matlab-simulink bajo el concepto de “hardware in the loop”.'' Master's thesis, Escuela Politécnica Nacional, 01 2025. [Online]. Available: \url{https://bibdigital.epn.edu.ec/handle/15000/26639}
+S.~Salas~Arriarán, \emph{Todo sobre sistemas embebidos}.\hskip 1em plus 0.5em minus 0.4em\relax Editorial UPC, 2015. [Online]. Available: \url{https://editorial.upc.edu.pe/todo-sobre-sistemas-embebidos-iwlnk.html}
 \BIBentrySTDinterwordspacing
 
 \bibitem{wirth_2022_superloop}
@@ -30,9 +30,9 @@ L.~D. Verduga~Monar, ``Controladores con restricciones en el tiempo de respuesta
 L.~E. Wirth and F.~G. Ortiz, ``Desarrollo e implementación del sistema de control de bajo nivel de un robot 4wd para ambientes frutícolas,'' Master's thesis, Universidad Nacional del Comahue, 2022. [Online]. Available: \url{https://rdi.uncoma.edu.ar/handle/uncomaid/16993}
 \BIBentrySTDinterwordspacing
 
-\bibitem{sergio_2015_interrupciones}
+\bibitem{verdugamonar_2025_controladores}
 \BIBentryALTinterwordspacing
-S.~Salas~Arriarán, \emph{Todo sobre sistemas embebidos}.\hskip 1em plus 0.5em minus 0.4em\relax Editorial UPC, 2015. [Online]. Available: \url{https://editorial.upc.edu.pe/todo-sobre-sistemas-embebidos-iwlnk.html}
+L.~D. Verduga~Monar, ``Controladores con restricciones en el tiempo de respuesta implementados en un sistema embebido stm32 aplicados a las variables flujo y presión de un reactor industrial : diseño e implementación de un controlador con restricciones en el tiempo de respuesta en un sistema embebido stm32 aplicado a la variable presión de un reactor industrial simulado en matlab-simulink bajo el concepto de “hardware in the loop”.'' Master's thesis, Escuela Politécnica Nacional, 01 2025. [Online]. Available: \url{https://bibdigital.epn.edu.ec/handle/15000/26639}
 \BIBentrySTDinterwordspacing
 
 \bibitem{ortega_2019_scheduler}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  7 MAY 2026 11:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  31 MAY 2026 19:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -637,26 +637,27 @@ Package hyperref Info: Link coloring ON on input line 18.
 \openout3 = `main.out'.
 
 Package hyperref Info: Option `breaklinks' set `true' on input line 21.
- (./section/abstract.tex) (./section/introduction.tex) (./section/literature.tex) (./section/MarcoTeo.tex
-<images/problem_diagram.png, id=188, 445.665pt x 545.03625pt>
+ (./section/abstract.tex
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 3.
+ (/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)) (./section/introduction.tex [1{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc}
+
+
+]) (./section/literature.tex) (./section/MarcoTeo.tex
+<images/problem_diagram.png, id=242, 445.665pt x 545.03625pt>
 File: images/problem_diagram.png Graphic file (type png)
 <use images/problem_diagram.png>
 Package pdftex.def Info: images/problem_diagram.png  used on input line 24.
 (pdftex.def)             Requested size: 226.79846pt x 277.36601pt.
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 25.
- (/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) [1{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc}
-
-
-]
+ [2 <./images/problem_diagram.png>]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 45.
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 55.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-<images/solution_diagram.png, id=211, 565.11125pt x 489.83pt>
+<images/solution_diagram.png, id=260, 565.11125pt x 489.83pt>
 File: images/solution_diagram.png Graphic file (type png)
 <use images/solution_diagram.png>
 Package pdftex.def Info: images/solution_diagram.png  used on input line 59.
@@ -668,9 +669,13 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [2 <./images/problem_diagram.png>] [3 <./images/solution_diagram.png>]) (./section/Talleres.tex (./section/subsections/Reto1.tex (./tables/Table_1_R1.tex) (./Codes/Code_1_R1.tex
+) [3 <./images/solution_diagram.png>]) (./section/Talleres.tex [4] (./section/subsections/Reto1.tex (./tables/Table_1_R1.tex
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (./Codes/Code_1_R1.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 2.
-) [4] (./tables/Table_2_R1.tex
+) (./tables/Table_2_R1.tex
 Overfull \hbox (11.62202pt too wide) in paragraph at lines 8--21
  [][] 
  []
@@ -678,7 +683,10 @@ Overfull \hbox (11.62202pt too wide) in paragraph at lines 8--21
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./tables/Table_3_R1.tex) [5]
+) [5] (./tables/Table_3_R1.tex)
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 106.
@@ -709,24 +717,27 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 109.
-<images/Imagen_1R1.png, id=273, 564.86232pt x 368.86607pt>
+<images/Imagen_1R1.png, id=310, 564.86232pt x 368.86607pt>
 File: images/Imagen_1R1.png Graphic file (type png)
 <use images/Imagen_1R1.png>
 Package pdftex.def Info: images/Imagen_1R1.png  used on input line 116.
 (pdftex.def)             Requested size: 252.0pt x 164.55856pt.
- (./Codes/Code_2_R1.tex
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+(./Codes/Code_2_R1.tex [6{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 1.
 
 Overfull \hbox (8.00244pt too wide) in paragraph at lines 12--13
 [][][][][][][][][][][][][][][][][] 
  []
 
-[6{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/Imagen_1R1.png>] [7] [8])) (./section/subsections/Reto2.tex (./tables/Table_1_R2.tex
+[7 <./images/Imagen_1R1.png>] [8])) (./section/subsections/Reto2.tex [9] (./tables/Table_1_R2.tex
 Overfull \hbox (3.25473pt too wide) in paragraph at lines 28--28
 []|\T1/ptm/m/n/8 UMBRAL_ADVERTENCIA| 
  []
 
-) (./Codes/Code1_R2.tex) (./tables/Table_2_R2.tex) [9]
+) (./Codes/Code1_R2.tex) (./tables/Table_2_R2.tex) [10]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 78.
@@ -763,12 +774,16 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 82.
-<images/Imagen_1R2.png, id=557, 705.3552pt x 371.75688pt>
+<images/Imagen_1R2.png, id=603, 705.3552pt x 371.75688pt>
 File: images/Imagen_1R2.png Graphic file (type png)
 <use images/Imagen_1R2.png>
 Package pdftex.def Info: images/Imagen_1R2.png  used on input line 87.
 (pdftex.def)             Requested size: 252.0pt x 132.81699pt.
- (./Codes/Code2_R2.tex [10 <./images/Imagen_1R2.png>]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+(./Codes/Code2_R2.tex
 Overfull \hbox (6.00232pt too wide) in paragraph at lines 16--17
 [][][][][][][][][][][][] 
  []
@@ -778,7 +793,7 @@ Overfull \hbox (6.00232pt too wide) in paragraph at lines 26--27
 [][][][][][][][][][][][] 
  []
 
-
+[11 <./images/Imagen_1R2.png>]
 Overfull \hbox (12.00238pt too wide) in paragraph at lines 41--42
 [][][][][][][][][][][][][] 
  []
@@ -798,17 +813,17 @@ Overfull \hbox (12.00238pt too wide) in paragraph at lines 67--68
 [][][][][][][][][][] 
  []
 
-[11]
+
 Overfull \hbox (30.00256pt too wide) in paragraph at lines 112--113
 [][][][][][][][][][][][] 
  []
 
-)) (./section/subsections/Reto3.tex (./tables/Table_1_R3.tex) (./Codes/Code1_R3.tex) [12] (./tables/Table_2_R3.tex) (./tables/Table_3_R3.tex
+[12])) (./section/subsections/Reto3.tex (./tables/Table_1_R3.tex) (./Codes/Code1_R3.tex) [13] (./tables/Table_2_R3.tex) (./tables/Table_3_R3.tex
 Overfull \hbox (3.65367pt too wide) in paragraph at lines 35--35
 []|\T1/ptm/b/n/10 Especificación| 
  []
 
-) [13]
+)
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 92.
@@ -818,6 +833,7 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 92.
+ [14]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 94.
@@ -845,16 +861,12 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 100.
-<images/Imagen_1R3.png, id=708, 733.10687pt x 391.99248pt>
+<images/Imagen_1R3.png, id=755, 733.10687pt x 391.99248pt>
 File: images/Imagen_1R3.png Graphic file (type png)
 <use images/Imagen_1R3.png>
 Package pdftex.def Info: images/Imagen_1R3.png  used on input line 110.
 (pdftex.def)             Requested size: 252.0pt x 134.74109pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-(./Codes/Code2_R3.tex [14 <./images/Imagen_1R3.png>]
+ (./Codes/Code2_R3.tex [15 <./images/Imagen_1R3.png>]
 Overfull \hbox (14.0025pt too wide) in paragraph at lines 68--69
 [][][][][][][][][][][][][] 
  []
@@ -864,7 +876,7 @@ Overfull \hbox (14.0025pt too wide) in paragraph at lines 77--78
 [][][][][][][][][][][][][] 
  []
 
-[15]
+
 Overfull \hbox (2.00238pt too wide) in paragraph at lines 108--109
 [][][][][][][][][][] 
  []
@@ -874,19 +886,30 @@ Overfull \hbox (8.00244pt too wide) in paragraph at lines 117--118
 [][][][][][][][][][][][][][][][][][] 
  []
 
-[16]))) (./section/protocolosDeCom.tex (./tables/Table_4_PDCIoT.tex) [17]) (./section/iotVSint.tex [18] [19]) (./section/proyectoFinal.tex [20] (./tables/Table_RF_ProyectoFinal.tex) (./tables/Table_RNF_ProyectoFinal.tex)
-<images/diagrama-capas.png, id=963, 1129.21875pt x 828.09375pt>
+[16]))) (./section/protocolosDeCom.tex [17] (./tables/Table_4_PDCIoT.tex)) (./section/iotVSint.tex [18] [19]) (./section/proyectoFinal.tex [20] (./tables/Table_RF_ProyectoFinal.tex) (./tables/Table_RNF_ProyectoFinal.tex)
+<images/diagrama-capas.png, id=1001, 1129.21875pt x 828.09375pt>
 File: images/diagrama-capas.png Graphic file (type png)
 <use images/diagrama-capas.png>
 Package pdftex.def Info: images/diagrama-capas.png  used on input line 86.
 (pdftex.def)             Requested size: 252.0pt x 184.79677pt.
- (./tables/Table_VarFisc_ProyectoFinal.tex)
-<images/vista-isometrica.png, id=966, 1445.4pt x 813.0375pt>
+ (./tables/Table_VarFisc_ProyectoFinal.tex) [21] [22 <./images/diagrama-capas.png (PNG copy)>]
+<images/vista-isometrica.png, id=1020, 1445.4pt x 813.0375pt>
 File: images/vista-isometrica.png Graphic file (type png)
 <use images/vista-isometrica.png>
 Package pdftex.def Info: images/vista-isometrica.png  used on input line 116.
 (pdftex.def)             Requested size: 252.0pt x 141.75023pt.
- (./tables/Table_DimContenedor.tex) [21 <./images/diagrama-capas.png (PNG copy)> <./images/vista-isometrica.png (PNG copy)>] (./tables/Table_CompHidraulico.tex) (./tables/Table_TechoServo.tex) [22] [23] (./tables/Table_PinesESP32.tex) (./tables/Table_CompTarjetas.tex) [24] (./tables/Table_Sensores.tex) (./tables/Table_Actuadores.tex) (./tables/Table_ThingSpeakCampos.tex) (./tables/Table_MQTT.tex [25]) (./tables/Table_HW_ProyectoFinal.tex) (./tables/Table_FW_ProyectoFinal.tex)) (./section/results.tex) (./section/conclusions.tex) [26] [27] (./section/acknoledgment.tex) (./main.bbl)
+ [23 <./images/vista-isometrica.png (PNG copy)>] (./tables/Table_DimContenedor.tex) (./tables/Table_CompHidraulico.tex) (./tables/Table_TechoServo.tex) (./tables/Table_PinesESP32.tex) (./tables/Table_CompTarjetas.tex) (./tables/Table_Sensores.tex) [24] [25] (./tables/Table_Actuadores.tex) (./tables/Table_ThingSpeakCampos.tex) (./tables/Table_MQTT.tex [26]) (./tables/Table_HW_ProyectoFinal.tex) (./tables/Table_FW_ProyectoFinal.tex)
+<../capturas/proyecto-montado.jpeg, id=1067, 370.0224pt x 493.3632pt>
+File: ../capturas/proyecto-montado.jpeg Graphic file (type jpg)
+<use ../capturas/proyecto-montado.jpeg>
+Package pdftex.def Info: ../capturas/proyecto-montado.jpeg  used on input line 249.
+(pdftex.def)             Requested size: 252.0pt x 336.00198pt.
+<../capturas/proyecto-graficos.png, id=1069, 2350.7825pt x 1818.795pt>
+File: ../capturas/proyecto-graficos.png Graphic file (type png)
+<use ../capturas/proyecto-graficos.png>
+Package pdftex.def Info: ../capturas/proyecto-graficos.png  used on input line 260.
+(pdftex.def)             Requested size: 252.0pt x 194.9616pt.
+ [27] [28] [29 <../capturas/proyecto-montado.jpeg> <../capturas/proyecto-graficos.png>]) (./section/results.tex) [30] (./section/conclusions.tex) (./section/acknoledgment.tex) (./main.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -898,29 +921,27 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[28
-
-] (./main.aux)
+[31] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 043048DCFF73B7C0F23A83BF53FCD36E;8519.
+(rerunfilecheck)             Checksum: E199546FE68D550645070107B7D73E23;10469.
  ) 
 Here is how much of TeX's memory you used:
- 17722 strings out of 467525
- 278201 string characters out of 5418982
- 779421 words of memory out of 5000000
- 45539 multiletter control sequences out of 15000+600000
- 745201 words of font info for 164 fonts, out of 8000000 for 9000
+ 17762 strings out of 467525
+ 279141 string characters out of 5418982
+ 773801 words of memory out of 5000000
+ 45564 multiletter control sequences out of 15000+600000
+ 745822 words of font info for 166 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,15n,82p,1066b,2210s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (28 pages, 2723704 bytes).
+ 80i,15n,82p,1736b,2214s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (31 pages, 3959920 bytes).
 PDF statistics:
- 1254 PDF objects out of 1440 (max. 8388607)
- 1172 compressed objects within 12 object streams
- 713 named destinations out of 1000 (max. 500000)
- 404 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1331 PDF objects out of 1440 (max. 8388607)
+ 1240 compressed objects within 13 object streams
+ 726 named destinations out of 1000 (max. 500000)
+ 478 words of extra memory for PDF output out of 10000 (max. 10000000)
 

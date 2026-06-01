@@ -1,17 +1,34 @@
-% Resultados: presenta tablas/figuras y comenta hallazgos clave.
+% Resultados globales de la bitácora
+\setstretch{1.2}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{15pt}
 
-%\subsection{Ejemplo de figura} % Sub-sección para ilustrar resultados gráficos
-% \begin{figure}[!t]             % Entorno de figura; [!t]=arriba, con preferencia fuerte (!)
- %  \centering
-  % includegraphics: inserta imagen externa
-  % keepaspectratio: conserva la relación de aspecto al escalar
-  % width=0.9\linewidth: ancho al 90% de la línea actual (se puede usar height=...)
-%   \includegraphics[keepaspectratio, width=0.9\linewidth]{images/neurons.pdf}
-%   \caption{Figura de ejemplo generada con PGF (sustituible por tus resultados).} % Texto bajo la figura
-%   \label{fig:res_fig}          % Etiqueta para referenciar con \ref{fig:res_fig}
-% \end{figure}
+\subsection{Taller de programación estructurada}
 
-%\subsection{Ejemplo de tabla}  % Sub-sección para resultados en formato tabla
- % \input{tables/table2.tex}      % Inserta archivo de tabla externa en este punto
+El taller integrador de programación estructurada se desarrolló en torno a tres retos aplicados de sistemas embebidos, todos implementados sobre la plataforma ESP32-WROOM desde PlatformIO en Visual Studio Code, siguiendo la restricción de no utilizar archivos con extensión \texttt{.ino}.
 
-% Consejos: Compara contra una línea base y reporta métricas con su interpretación.
+El Reto~1 abordó el análisis de un sistema de control de acceso mediante contraseña digital, identificando las entradas, salidas y restricciones temporales del problema. La discusión central permitió establecer las limitaciones de la arquitectura Super-loop para sistemas con múltiples tareas de diferente criticidad temporal, y justificó la necesidad de mecanismos de control concurrente como interrupciones hardware y planificadores de prioridades \cite{wirth_2022_superloop}.
+
+En los Retos~2 y 3 se implementaron versiones incrementales del sistema de control de acceso, progresando desde una arquitectura secuencial hacia una solución estructurada con manejo de estados, temporización no bloqueante mediante \texttt{millis()} y modularización del código. Los resultados evidenciaron que el uso de \texttt{millis()} como mecanismo de temporización elimina los bloqueos del bucle principal sin requerir un RTOS, siempre que las tareas individuales sean suficientemente cortas.
+
+\subsection{Marco referencial: arquitecturas de firmware}
+
+El estudio del marco referencial consolidó la comprensión de tres conceptos clave para el diseño de firmware embebido: interrupciones hardware (ISR), planificación cooperativa y preventiva mediante schedulers, y sincronización entre tareas concurrentes mediante semáforos y mutex \cite{sergio_2015_interrupciones} \cite{ortega_2019_scheduler} \cite{pez_2025_sincronizacion}. Estos conceptos se aplicaron directamente en las decisiones de diseño del firmware del proyecto final.
+
+\subsection{Protocolos de comunicación e IoT}
+
+El análisis de protocolos de comunicación —desde interfaces internas como I2C, SPI y UART hasta tecnologías inalámbricas como Wi-Fi, BLE y LoRaWAN— permitió seleccionar y justificar el uso de Wi-Fi con MQTT para el proyecto final. La comparativa entre internet convencional, IoT e IIoT contextualizó el sistema desarrollado dentro de la arquitectura de cuatro capas propia de los sistemas IoT (percepción, comunicación, servicio y aplicación).
+
+\subsection{Proyecto final: sistema IoT para semillero de perejil}
+
+El prototipo funcional fue implementado y validado satisfactoriamente. Durante las pruebas experimentales se registraron los siguientes resultados cuantitativos:
+
+\begin{itemize}
+    \item \textbf{Temperatura:} 19,1--19,4\,°C, dentro del rango óptimo para germinación del perejil (15--25\,°C). El techo permaneció abierto al no superar el umbral de 28\,°C.
+    \item \textbf{Humedad del aire:} 67,5--69,0\,\%, valores consistentes con las condiciones ambientales del laboratorio.
+    \item \textbf{Humedad del sustrato:} 100\,\% (sustrato saturado al inicio de la prueba), lo que mantuvo la bomba de riego desactivada durante toda la sesión, en concordancia con la lógica de histéresis implementada.
+    \item \textbf{Publicación MQTT:} continua y estable con un intervalo de 15\,s, cumpliendo la restricción del plan gratuito de ThingSpeak y el requisito RF-08.
+    \item \textbf{Pantalla OLED:} alternancia correcta entre las dos páginas de visualización (datos de sensores y estado del sistema) cada 4\,s.
+\end{itemize}
+
+La conectividad Wi-Fi y la reconexión automática al broker MQTT funcionaron sin interrupciones durante el periodo de prueba. El firmware no bloqueante demostró capacidad para gestionar concurrentemente las cinco tareas del sistema sin pérdida de lecturas ni retrasos apreciables en la publicación IoT.

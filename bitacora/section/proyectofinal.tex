@@ -235,3 +235,59 @@ La Tabla~\ref{tab:funciones_hardware} asigna las funciones al hardware y la Tabl
 
 \input{tables/Table_HW_ProyectoFinal.tex}
 \input{tables/Table_FW_ProyectoFinal.tex}
+
+% ============================================================
+\subsection{Resultados del prototipo}
+% ============================================================
+
+\subsubsection{Prototipo físico implementado}
+
+La Figura~\ref{fig:proyecto-montado} muestra el prototipo final ensamblado. El contenedor de base triangular fue construido en PVC blanco y madera, con la estructura de soporte en madera de balso. El sustrato con las semillas de perejil ocupa el interior del contenedor. El sistema hidráulico de riego por goteo —bomba sumergible conectada a tres ramales de silicona con filtro de malla— se integró sobre el sustrato. La caja electrónica con el ESP32-WROOM, el módulo relé, el DHT11 y el sensor YL-100 se ubicó externamente al contenedor para facilitar el acceso y mantenimiento. El servo MG995 controla el techo móvil triangular de madera que cubre la estructura superior.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\columnwidth]{../capturas/proyecto-montado.jpeg}
+    \caption{Prototipo final ensamblado: contenedor triangular con sustrato, sistema de riego por goteo, techo móvil y caja electrónica con ESP32-WROOM.}
+    \label{fig:proyecto-montado}
+\end{figure}
+
+\subsubsection{Monitoreo remoto en ThingSpeak}
+
+La Figura~\ref{fig:proyecto-graficos} presenta los gráficos del canal ThingSpeak del Grupo~G5 durante una sesión de prueba. Los cinco campos publicados vía MQTT cada 15~s muestran el comportamiento del sistema en tiempo real.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\columnwidth]{../capturas/proyecto-graficos.png}
+    \caption{Dashboard ThingSpeak — canal \textit{Semillero Perejil}: los cinco campos publicados vía MQTT (temperatura, humedad del aire, humedad del sustrato, estado de la bomba y estado del techo).}
+    \label{fig:proyecto-graficos}
+\end{figure}
+
+Del análisis de los gráficos se extraen las siguientes observaciones:
+
+\begin{itemize}
+    \item \textbf{Field~1 — Temperatura:} registró valores entre 19,1 y 19,4\,°C. La temperatura se mantuvo dentro del rango óptimo para la germinación del perejil (15--25\,°C) y por debajo del umbral de cierre del techo (\texttt{TEMP\_CIERRA\_TECHO} = 28\,°C), por lo que el servo permaneció en 0° (techo abierto) durante toda la prueba.
+
+    \item \textbf{Field~2 — Humedad del aire:} osciló entre 67,5 y 69,0\,\%. Los valores son coherentes con las condiciones ambientales del laboratorio y no activan ninguna lógica de control directa, ya que el control de riego depende exclusivamente de la humedad del sustrato.
+
+    \item \textbf{Field~3 — Humedad del sustrato:} se mantuvo en 100\,\% de forma constante. Esto indica que el sustrato estaba saturado al inicio de la prueba, lo que impidió que la lógica de riego activara la bomba (\texttt{humedadSustrato} $\geq$ \texttt{HUMEDAD\_MAX\_RIEGO} = 80\,\%).
+
+    \item \textbf{Field~4 — Estado de la bomba:} permaneció en 0 (OFF) durante toda la sesión, consistente con la lectura de humedad del sustrato $\geq$ 80\,\%, que mantiene la bomba desactivada según la lógica de histéresis implementada.
+
+    \item \textbf{Field~5 — Estado del techo:} permaneció en 0 (ABIERTO) durante toda la sesión, dado que la temperatura registrada (19,1--19,4\,°C) nunca superó el umbral de cierre de 28\,°C.
+\end{itemize}
+
+La publicación MQTT fue continua y estable durante la sesión de prueba, confirmando la correcta integración del firmware con el broker \texttt{mqtt3.thingspeak.com} a través de la librería PubSubClient.
+
+% ============================================================
+\subsection{Conclusiones del proyecto}
+% ============================================================
+
+El sistema embebido IoT para el semillero de perejil fue implementado y validado exitosamente, cumpliendo con los requisitos funcionales y no funcionales establecidos en el Acta~1 y en las tablas de requisitos del proyecto.
+
+La arquitectura de firmware no bloqueante basada en \texttt{millis()} permitió gestionar concurrentemente la lectura de sensores (DHT11 y YL-100), el control con histéresis del techo móvil (servo MG995) y del riego (bomba relé), la actualización de la pantalla OLED y la publicación periódica en ThingSpeak vía MQTT, sin comprometer ninguna de las funciones en tiempo real.
+
+Las pruebas experimentales confirmaron que la temperatura ambiental registrada (19,1--19,4\,°C) se encuentra dentro del rango óptimo para la germinación del perejil (15--25\,°C), que la lógica de control actúa correctamente según los umbrales definidos —la bomba permaneció apagada con sustrato saturado y el techo se mantuvo abierto por debajo de 28\,°C— y que la transmisión MQTT hacia ThingSpeak opera de forma estable con un intervalo de actualización de 15\,s, cumpliendo la restricción del plan gratuito de la plataforma.
+
+La elección del ESP32-WROOM se justificó tanto técnica como experimentalmente: su módulo Wi-Fi integrado eliminó hardware adicional, el periférico LEDC generó la señal PWM de 50\,Hz necesaria para el servo MG995, y el ADC de 12 bits permitió convertir la salida analógica del YL-100 sin circuito acondicionador externo.
+
+Como trabajo futuro se propone refinar la calibración del sensor YL-100 —particularmente los valores \texttt{ADC\_SUELO\_SECO} y \texttt{ADC\_SUELO\_HUMEDO}— para evitar lecturas de saturación constante en 100\,\%, implementar un registro histórico en MATLAB Analysis de ThingSpeak para detectar tendencias de humedad y temperatura a largo plazo, y evaluar la incorporación de un sensor de nivel de agua en el depósito de riego para generar alertas cuando el volumen disponible sea insuficiente.

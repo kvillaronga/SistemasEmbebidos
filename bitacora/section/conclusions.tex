@@ -1,9 +1,16 @@
-% Conclusiones: 3–5 viñetas claras. Incluye trabajo futuro.
+% Conclusiones globales de la bitácora
+\setstretch{1.2}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{15pt}
 
-En esta plantilla:
+El desarrollo de la bitácora técnica permitió integrar de forma coherente los contenidos teóricos y prácticos del curso de Sistemas Embebidos, desde los fundamentos de arquitecturas de firmware hasta la implementación y validación de un sistema IoT funcional orientado a la agricultura de precisión.
 
-- Se mostró la estructura básica de un artículo IEEEtran en LaTeX en español.
-- Se incluyeron ejemplos mínimos de figuras, tablas, ecuaciones y citas.
-- Se proporcionaron comentarios en el código para guiar el uso en clase.
+El taller de programación estructurada demostró que la arquitectura Super-loop, si bien es adecuada para sistemas simples, presenta limitaciones deterministas críticas en presencia de tareas con requisitos temporales heterogéneos. La transición hacia una arquitectura basada en temporizadores no bloqueantes con \texttt{millis()} —adoptada finalmente en el firmware del proyecto final— resolvió estas limitaciones sin requerir un RTOS, al garantizar que ninguna tarea monopoliza el CPU durante periodos prolongados \cite{wirth_2022_superloop}.
 
-Trabajo futuro: reemplazar el contenido de ejemplo por el de tu proyecto, añadir más secciones si es necesario y ajustar el preámbulo según las normas de la conferencia o revista.
+El estudio de protocolos de comunicación confirmó que la elección del protocolo debe derivarse de los requisitos del sistema: alcance, consumo energético, latencia y volumen de datos. Para el proyecto del semillero, MQTT sobre Wi-Fi resultó la opción más adecuada por su bajo overhead, soporte nativo en el ESP32-WROOM y compatibilidad directa con el broker de ThingSpeak \cite{sergio_2015_interrupciones}.
+
+El proyecto final evidenció que un sistema embebido IoT de bajo costo puede monitorear y controlar de forma autónoma las condiciones de un cultivo experimental, reduciendo la necesidad de intervención manual y generando un registro histórico continuo en la nube. Los resultados experimentales validaron el correcto funcionamiento de la lógica de histéresis para el riego y el techo móvil, la estabilidad de la conexión MQTT y la precisión de la visualización en ThingSpeak.
+
+Como aprendizaje transversal, el curso evidenció que el diseño de un sistema embebido exitoso no depende únicamente del hardware seleccionado, sino de la calidad del firmware, la correcta definición de requisitos y la capacidad de integrar sensores, actuadores, comunicación y plataformas IoT en una solución cohesiva, documentada y reproducible. El uso de PlatformIO, GitHub y la bitácora técnica en formato IEEE reforzó las buenas prácticas de ingeniería de software embebido aplicables en entornos profesionales e industriales.
+
+Como trabajo futuro se propone: refinar la calibración del sensor YL-100 con mediciones experimentales de sustrato seco y saturado; incorporar un sensor de nivel en el depósito de agua para alertas de bajo volumen; implementar análisis estadístico de tendencias mediante MATLAB Analysis en ThingSpeak; y explorar el uso de FreeRTOS en el ESP32 para escalar el sistema hacia arquitecturas multitarea más complejas \cite{verdugamonar_2025_controladores}.
